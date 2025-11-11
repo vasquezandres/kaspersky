@@ -1,0 +1,169 @@
+
+{
+  "home": [
+    {
+      "type": "devices",
+      "name": "Kaspersky Standard (LA)",
+      "desc": "Protección esencial multi-dispositivo.",
+      "tags": ["Windows","macOS","Android","iOS"],
+      "variants": {
+        "1": {"1":"KL1041DDAFS","2":"KL1041DDADS"},
+        "3": {"1":"KL1041DDCFS","2":"KL1041DDCDS"},
+        "5": {"1":"KL1041DDEFS","2":"KL1041DDEDS"},
+        "10":{"1":"KL1041DDKFS","2":"KL1041DDKDS"}
+      }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Plus (LA)",
+      "desc": "Incluye Standard + privacidad y utilidades.",
+      "tags": ["Windows","macOS","Android","iOS","Privacidad"],
+      "variants": {
+        "1": {"1":"KL1042DDAFS","2":"KL1042DDADS"},
+        "3": {"1":"KL1042DDCFS","2":"KL1042DDCDS"},
+        "5": {"1":"KL1042DDEFS","2":"KL1042DDEDS"},
+        "10":{"1":"KL1042DDKFS","2":"KL1042DDKDS"}
+      }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Premium (LA)",
+      "desc": "Nivel máximo de protección y soporte prioritario.",
+      "tags": ["Windows","macOS","Android","iOS","Soporte"],
+      "variants": {
+        "1": {"1":"KL1047DDAFS","2":"KL1047DDADS"},
+        "3": {"1":"KL1047DDCFS","2":"KL1047DDCDS"},
+        "5": {"1":"KL1047DDEFS","2":"KL1047DDEDS"},
+        "10":{"1":"KL1047DDKFS","2":"KL1047DDKDS"},
+        "20":{"1":"KL1047DDNFS","2":"KL1047DDNDS"}
+      }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Safe Kids (LA)",
+      "desc": "Control parental y gestión de tiempo en pantalla.",
+      "tags": ["Familia","Control parental"],
+      "variants": { "1": { "1":"KL1962DDAFS" } }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Password Manager (LA)",
+      "desc": "Gestión de contraseñas con cifrado.",
+      "tags": ["Multi-dispositivo","Seguridad"],
+      "variants": { "1": { "1":"KL1956DDAFS" } }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky VPN Secure Connection (LA)",
+      "desc": "Cifrado del tráfico y protección en Wi‑Fi públicas.",
+      "tags": ["VPN","Privacidad"],
+      "variants": { "5": { "1":"KL1987DDEFS" } }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Mobile — Standard (LA)",
+      "desc": "Protección móvil esencial.",
+      "tags": ["Android","iOS"],
+      "variants": { "1": { "1":"KL1048DDAFS" } }
+    },
+    {
+      "type": "devices",
+      "name": "Kaspersky Mobile — Premium (LA)",
+      "desc": "Protección móvil con funciones avanzadas.",
+      "tags": ["Android","iOS"],
+      "variants": { "1": { "1":"KL1004DDAFS" } }
+    }
+  ],
+  "smalloffice": [
+    {
+      "type": "range",
+      "name": "Kaspersky Small Office Security (por nodos)",
+      "desc": "Rangos de 5–9, 10–14, 15–19, 20–24, 25–49 y 50–99 nodos. Incluye móviles/desktops/servidores según tramo.",
+      "tags": ["Windows","macOS","Android","Servidor"],
+      "variants": {
+        "5-9":  {"1":"KL4542DPEFS","2":"KL4542DPEDS","3":"KL4542DPETS"},
+        "10-14":{"1":"KL4542DPKFS","2":"KL4542DPKDS","3":"KL4542DPKTS"},
+        "15-19":{"1":"KL4542DPMFS","2":"KL4542DPMDS","3":"KL4542DPMTS"},
+        "20-24":{"1":"KL4542DPNFS","2":"KL4542DPNDS","3":"KL4542DPNTS"},
+        "25-49":{"1":"KL4542DPPFS","2":"KL4542DPPDS","3":"KL4542DPPTS"},
+        "50-99":{"1":"KL4541DPQFS","2":"KL4541DPQDS","3":"KL4541DPQTS"}
+      }
+    },
+    {
+      "type": "range",
+      "name": "Kaspersky Small Office Security (equipos fijos)",
+      "desc": "Paquetes de 5, 10, 15, 20, 25 o 50 equipos (móviles y desktop) + servidor según pack.",
+      "tags": ["Windows","macOS","Android","Servidor"],
+      "range": { "min": 5, "max": 50, "step": 1 },
+      "packSizes": [5, 10, 15, 20, 25, 50],
+      "serversByPack": { "5": 1, "10": 1, "15": 2, "20": 2, "25": 3, "50": 5 },
+      "variants": {
+        "5":  {"1":"KL4541DDEFS","2":"KL4541DDEDS","3":"KL4541DDETS"},
+        "10": {"1":"KL4541DDKFS","2":"KL4541DDKDS","3":"KL4541DDKTS"},
+        "15": {"1":"KL4541DDMFS","2":"KL4541DDMDS","3":"KL4541DDMTS"},
+        "20": {"1":"KL4541DDNFS","2":"KL4541DDNDS","3":"KL4541DDNTS"},
+        "25": {"1":"KL4541DDPFS","2":"KL4541DDPDS","3":"KL4541DDPTS"},
+        "50": {"1":"KL4541DDQFS","2":"KL4541DDQDS","3":"KL4541DDQTS"}
+      }
+    }
+  ],
+  "business": [
+    {
+      "type": "range",
+      "name": "Kaspersky Endpoint Security Cloud",
+      "desc": "Gestión centralizada en la nube para endpoints y móviles. Ideal para PYMEs y corporativos.",
+      "tags": ["Cloud","B2B","Endpoints"],
+      "download": "#",
+      "range": { "min": 10, "max": 999, "step": 1 },
+      "variants": {
+        "10-14": { "1": "KL4742DPKFS", "2": "KL4742DPKDS", "3": "KL4742DPKTS" },
+        "15-19": { "1": "KL4742DPMFS", "2": "KL4742DPMDS", "3": "KL4742DPMTS" },
+        "20-24": { "1": "KL4742DPNFS", "2": "KL4742DPNDS", "3": "KL4742DPNTS" },
+        "25-49": { "1": "KL4742DPPFS", "2": "KL4742DPPDS", "3": "KL4742DPPTS" },
+        "50-99": { "1": "KL4742DPQFS", "2": "KL4742DPQDS", "3": "KL4742DPQTS" },
+        "100-149": { "1": "KL4742DPRFS", "2": "KL4742DPRDS", "3": "KL4742DPRTS" },
+        "150-249": { "1": "KL4742DPSFS", "2": "KL4742DPSDS", "3": "KL4742DPSTS" },
+        "250-499": { "1": "KL4742DPTFS", "2": "KL4742DPTDS", "3": "KL4742DPTTS" },
+        "500-999": { "1": "KL4742DPUFS", "2": "KL4742DPUDS", "3": "KL4742DPUTS" }
+      }
+    },
+    {
+      "type": "range",
+      "name": "Kaspersky Endpoint Security Cloud PLUS",
+      "desc": "Todas las funciones de Cloud con capacidades ampliadas para equipos de TI.",
+      "tags": ["Cloud","Plus","B2B"],
+      "download": "#",
+      "range": { "min": 10, "max": 999, "step": 1 },
+      "variants": {
+        "10-14": { "1": "KL4743DPKFS", "2": "KL4743DPKDS", "3": "KL4743DPKTS" },
+        "15-19": { "1": "KL4743DPMFS", "2": "KL4743DPMDS", "3": "KL4743DPMTS" },
+        "20-24": { "1": "KL4743DPNFS", "2": "KL4743DPNDS", "3": "KL4743DPNTS" },
+        "25-49": { "1": "KL4743DPPFS", "2": "KL4743DPPDS", "3": "KL4743DPPTS" },
+        "50-99": { "1": "KL4743DPQFS", "2": "KL4743DPQDS", "3": "KL4743DPQTS" },
+        "100-149": { "1": "KL4743DPRFS", "2": "KL4743DPRDS", "3": "KL4743DPRTS" },
+        "150-249": { "1": "KL4743DPSFS", "2": "KL4743DPSDS", "3": "KL4743DPSTS" },
+        "250-499": { "1": "KL4743DPTFS", "2": "KL4743DPTDS", "3": "KL4743DPTTS" },
+        "500-999": { "1": "KL4743DPUFS", "2": "KL4743DPUDS", "3": "KL4743DPUTS" }
+      }
+    },
+    {
+      "type": "range",
+      "name": "Kaspersky Endpoint Security Cloud PRO",
+      "desc": "Protección avanzada con capacidades de seguridad para servidores y flotas grandes.",
+      "tags": ["Cloud","Pro","B2B"],
+      "download": "#",
+      "range": { "min": 10, "max": 999, "step": 1 },
+      "variants": {
+        "10-14": { "1": "KL4746DPKFS", "2": "KL4746DPKDS", "3": "KL4746DPKTS" },
+        "15-19": { "1": "KL4746DPMFS", "2": "KL4746DPMDS", "3": "KL4746DPMTS" },
+        "20-24": { "1": "KL4746DPNFS", "2": "KL4746DPNDS", "3": "KL4746DPNTS" },
+        "25-49": { "1": "KL4746DPPFS", "2": "KL4746DPPDS", "3": "KL4746DPPTS" },
+        "50-99": { "1": "KL4746DPQFS", "2": "KL4746DPQDS", "3": "KL4746DPQTS" },
+        "100-149": { "1": "KL4746DPRFS", "2": "KL4746DPRDS", "3": "KL4746DPRTS" },
+        "150-249": { "1": "KL4746DPSFS", "2": "KL4746DPSDS", "3": "KL4746DPSTS" },
+        "250-499": { "1": "KL4746DPTFS", "2": "KL4746DPTDS", "3": "KL4746DPTTS" },
+        "500-999": { "1": "KL4746DPUFS", "2": "KL4746DPUDS", "3": "KL4746DPUTS" }
+      }
+    }
+  ]
+}

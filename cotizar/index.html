@@ -1,0 +1,78 @@
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotización | Kaspersky Panamá</title>
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head><body>
+<div data-include="header"></div>
+
+<main class="section container">
+  <h2>Resumen de tu cotización</h2>
+  <article class="card" id="quote-card">
+    <div class="title" id="q-name">Producto</div>
+    <div class="desc" id="q-desc">Detalles</div>
+    <div class="price"><span id="q-price">USD 0.00</span> <small> + ITBMS si aplica</small></div>
+  </article>
+  <h3>Datos de contacto</h3>
+  <form id="q-form" class="form">
+    <input class="input" name="name" placeholder="Nombre y apellido" required>
+    <input class="input" name="email" type="email" placeholder="Correo" required>
+    <input class="input" name="company" placeholder="Empresa (opcional)">
+    <textarea class="textarea" name="extra" placeholder="Comentarios adicionales (RUC, forma de pago, etc.)"></textarea>
+    <div class="btn-row">
+      <button class="btn primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar por correo</button>
+      <a id="q-wa" class="btn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp</a>
+    </div>
+  </form>
+  <p class="muted">¿Prefieres Google Forms? Deja tu enlace prellenado y cambiamos el destino en esta página (marcado como TODO en el código).</p>
+</main>
+
+<div data-include="footer"></div>
+<button id="fab-whatsapp" class="fab-whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+<script type="module" src="/assets/js/app.js"></script>
+<script type="module">
+  import { getActiveSheetName, formatPrice } from '/assets/js/app.js';
+  const SHEET_ID = "1h5RBn4NrQATYn-zZVeDVuo8Ory8KPdGugBlEceivs30";
+  function params(){ const u=new URL(location.href); const o={}; u.searchParams.forEach((v,k)=>o[k]=v); return o; }
+  async function priceBySKU(sku){
+    if(!sku) return 0;
+    try{
+      const sheet=getActiveSheetName();
+      const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheet)}`;
+      const raw=await fetch(url).then(r=>r.text());
+      const json=JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}')+1));
+      const cols=json.table.cols.map(c=>c.label);
+      const rows=json.table.rows.map(r=>r.c.map(c=>c?c.v:""));
+      const list=rows.map(r=>Object.fromEntries(r.map((v,i)=>[cols[i],v])));
+      const row=list.find(r=>String(r.SKU||"").trim()===String(sku).trim());
+      return row ? +String(row.PrecioUSD||'0').replace(/[^0-9.]/g,'') : 0;
+    }catch(e){ return 0; }
+  }
+  const p=params();
+  const name=p.product||'Producto Kaspersky';
+  const details=[p.devices?`${p.devices} dispositivos`:"",p.nodes?`${p.nodes} nodos (tramo ${p.range||''})`:"",p.pack?`Pack ${p.pack} equipos`:"",p.years?`${p.years} año(s)`:"",p.sku?`SKU ${p.sku}`:""].filter(Boolean).join(' • ');
+  document.getElementById('q-name').textContent=name;
+  document.getElementById('q-desc').textContent=details;
+  const price = await priceBySKU(p.sku);
+  document.getElementById('q-price').textContent = formatPrice(price);
+  const waTxt = `Cotización Kaspersky%0A%0A${name}%0A${details}%0APrecio: ${formatPrice(price)} (ITBMS según aplique)`;
+  document.getElementById('q-wa').href = "https://wa.me/50768886778?text="+waTxt;
+  document.getElementById('q-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    const f=new FormData(e.target);
+    const subject=encodeURIComponent(`Cotización Kaspersky — ${name}`);
+    const body=encodeURIComponent(`Producto: ${name}
+${details}
+Precio: ${formatPrice(price)} (ITBMS)
+
+Nombre: ${f.get('name')}
+Email: ${f.get('email')}
+Empresa: ${f.get('company')||'-'}
+
+Comentarios:
+${f.get('extra')||'-'}`);
+    location.href=`mailto:ventas@kasperskypanama.com?subject=${subject}&body=${body}`;
+  });
+</script>
+</body></html>

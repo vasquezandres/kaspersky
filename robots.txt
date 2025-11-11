@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /assets/
+Disallow: /components/
+Allow: /
+
+Sitemap: https://kasperskypanama.com/sitemap.xml
