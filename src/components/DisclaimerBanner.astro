@@ -1,0 +1,10 @@
+---
+import { disclaimer, type Lang } from '../data/i18n';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<div class="disclaimer" role="note">
+  <Icon name="info" />
+  <p style="margin:0">{disclaimer[lang]}</p>
+</div>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+const lang = 'en' as const;
+const updated = '2026';
+---
+<BaseLayout lang={lang} esPath="/politica-de-privacidad/"
+  title="Privacy policy | Solutech Panamá — Kaspersky"
+  description="Privacy policy of Solutech Panamá: what data we collect when you request a Kaspersky quote, how we use it and your rights under Panama's Law 81 of 2019.">
+  <section class="section"><div class="container prose">
+    <nav class="breadcrumb" aria-label="breadcrumb"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Privacy policy</span></nav>
+    <h1>Privacy policy</h1>
+    <p class="muted">Last updated: {updated}</p>
+
+    <p>At <strong>Solutech Panamá</strong> we respect your privacy. This policy explains what personal data we process when you use <strong>kasperskypanama.com</strong> or request a Kaspersky quote, and how we protect it, in line with <strong>Law 81 of 2019</strong> on Personal Data Protection of the Republic of Panama.</p>
+
+    <h2>1. Data controller</h2>
+    <p>Solutech Panamá, Panama City. Privacy contact: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+    <h2>2. Data we collect</h2>
+    <ul>
+      <li>Data you provide in the contact or quote form: name, email, company/tax ID (optional) and the message or details of your request.</li>
+      <li>Data you voluntarily share via WhatsApp or email when quoting or requesting support.</li>
+    </ul>
+    <p>We do not request online-banking passwords or sensitive financial data through the site.</p>
+
+    <h2>3. Purpose</h2>
+    <ul>
+      <li>Respond to your inquiries and prepare quotes.</li>
+      <li>Manage the sale, renewal, installation and support of licenses.</li>
+      <li>Issue the corresponding invoice when you make a purchase.</li>
+    </ul>
+    <p>We do not sell your personal data to third parties.</p>
+
+    <h2>4. Providers that process data on our behalf</h2>
+    <p>The contact form is processed through <strong>Formspree</strong>, which forwards your message to our email. WhatsApp communication takes place through Meta Platforms. These providers process data under their own policies. The site is hosted on Cloudflare Pages.</p>
+
+    <h2>5. Retention</h2>
+    <p>We keep your data for as long as necessary to handle your request and comply with applicable legal or tax obligations in Panama.</p>
+
+    <h2>6. Your rights</h2>
+    <p>Under Law 81 of 2019, you may request access, rectification, cancellation or objection regarding your personal data by writing to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+    <h2>7. Cookies and analytics</h2>
+    <p>This site aims to minimize cookie use. If we add analytics tools in the future, we will prioritize privacy-respecting options and update this policy.</p>
+
+    <h2>8. Changes</h2>
+    <p>We may update this policy. Any changes will be posted on this page with the update date.</p>
+
+    <p class="mt-3"><a href="/en/legal-notice/">See legal notice →</a></p>
+  </div></section>
+</BaseLayout>

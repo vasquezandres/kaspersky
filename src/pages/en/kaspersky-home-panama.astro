@@ -1,0 +1,42 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'Which Kaspersky is best for my home?', a: 'For basic use, <strong>Standard</strong>; if you use public networks or value privacy, <strong>Plus</strong>; for the most complete coverage and several devices, <strong>Premium</strong>. There are also focused products like Safe Kids (parental control), Password Manager, VPN and mobile protection.' },
+  { q: 'Can I combine several products?', a: 'Yes. For example, a Premium plan for your devices plus Safe Kids for the kids. We help you build the ideal combination.' },
+  { q: 'Do licenses work on Windows, Mac, Android and iOS?', a: 'Depending on the product, yes. Exact coverage depends on the plan; we confirm it when quoting.' },
+  { q: 'Is installation included?', a: 'We can include remote installation (with your authorization) or on-site in Panama City. Let us know when quoting.' },
+  { q: 'How do I receive the license?', a: 'By email/WhatsApp the same day, once payment is confirmed. If needed, we help you activate it.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-hogar-panama/"
+  title="Kaspersky for home in Panama | All options — Solutech"
+  description="All Kaspersky home licenses in Panama: Standard, Plus, Premium, Safe Kids, Password Manager, VPN and mobile protection. Quote and install with local support from Solutech."
+  h1="Kaspersky for home in Panama"
+  intro="Protect your digital home: antivirus for your devices, parental control, password manager, VPN and mobile security. Here are all the home options; adjust devices and years to see the price."
+  eyebrow="Home"
+  breadcrumbName="Home"
+  segment="home"
+  configHeading="Kaspersky antivirus & products for home"
+  faqs={faqs}
+  waText="Hi, I'd like a quote for Kaspersky for my home. I have ___ devices."
+  ctaHeading="Not sure which to choose?"
+  ctaText="Tell us how many devices you have and what you want to protect; we recommend the right option for your home."
+  ctaLabel="Quote on WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card hover"><div class="title"><Icon name="shield" /> Antivirus (Standard/Plus/Premium)</div><p class="desc" style="margin:0">Essential to complete protection for your computers and devices. <a href="/en/kaspersky-standard-panama/">Standard</a>, <a href="/en/kaspersky-plus-panama/">Plus</a> and <a href="/en/kaspersky-premium-panama/">Premium</a>.</p></article>
+        <article class="card hover"><div class="title"><Icon name="users" /> Safe Kids — parental control</div><p class="desc" style="margin:0">Supervise and protect your children's activity on their devices.</p></article>
+        <article class="card hover"><div class="title"><Icon name="lock" /> Password Manager</div><p class="desc" style="margin:0">Securely store and autofill passwords across all your devices.</p></article>
+        <article class="card hover"><div class="title"><Icon name="globe" /> VPN Secure Connection</div><p class="desc" style="margin:0">More private and secure browsing, especially on public Wi-Fi.</p></article>
+        <article class="card hover"><div class="title"><Icon name="phone" /> Mobile protection</div><p class="desc" style="margin:0">Dedicated security for Android and iOS (Mobile Standard and Premium).</p></article>
+        <article class="card hover"><div class="title"><Icon name="briefcase" /> Is it for your business?</div><p class="desc" style="margin:0">If you need to protect several work devices, see <a href="/en/kaspersky-small-office-security-panama/">Small Office Security</a>.</p></article>
+      </div>
+    </div>
+  </section>
+</ProductLayout>

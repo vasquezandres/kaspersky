@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro';
+import { type Lang } from '../data/i18n';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const isEs = lang === 'es';
+const heading = isEs ? '¿Por qué elegir a Solutech Panamá?' : 'Why choose Solutech Panamá?';
+const items = isEs
+  ? [
+      { icon: 'map', t: 'Atención local en Panamá', d: 'Soporte real en español, presencial en Ciudad de Panamá y remoto en todo el país.' },
+      { icon: 'shield', t: 'Licencias originales', d: 'Comercializamos licencias Kaspersky originales con asesoría para elegir el plan correcto.' },
+      { icon: 'bolt', t: 'Cotización rápida por WhatsApp', d: 'Respuesta ágil en horario laboral. Te ayudamos a decidir según tus equipos.' },
+      { icon: 'tools', t: 'Instalación y soporte', d: 'Instalación remota o presencial, limpieza de antivirus previos y verificación básica.' },
+      { icon: 'receipt', t: 'Facturación local', d: 'Emitimos factura con ITBMS cuando aplique. Incluye RUC y DV para empresas.' },
+      { icon: 'users', t: 'Hogares, profesionales y empresas', d: 'Desde un equipo personal hasta flotas corporativas con gestión en la nube.' },
+    ]
+  : [
+      { icon: 'map', t: 'Local support in Panama', d: 'Real support in Spanish and English, on-site in Panama City and remote nationwide.' },
+      { icon: 'shield', t: 'Original licenses', d: 'We sell original Kaspersky licenses and help you choose the right plan.' },
+      { icon: 'bolt', t: 'Fast quotes on WhatsApp', d: 'Quick replies during business hours. We help you decide based on your devices.' },
+      { icon: 'tools', t: 'Installation & support', d: 'Remote or on-site installation, removal of previous antivirus and basic verification.' },
+      { icon: 'receipt', t: 'Local invoicing', d: 'We issue invoices with applicable taxes (ITBMS). Includes company tax ID details.' },
+      { icon: 'users', t: 'Home, professionals & business', d: 'From a single personal device to corporate fleets with cloud management.' },
+    ];
+---
+<section class="section bg-alt">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <div class="grid cols-3 mt-4">
+      {items.map((i) => (
+        <article class="card hover">
+          <div class="title"><Icon name={i.icon} /> {i.t}</div>
+          <p class="desc" style="margin:0">{i.d}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

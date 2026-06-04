@@ -1,0 +1,42 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Puedo renovar aunque ya venció mi licencia?', a: 'Sí. Podemos renovar o emitir una licencia nueva aunque la anterior ya haya vencido.' },
+  { q: '¿Necesito comprar el mismo plan?', a: 'No necesariamente. Podemos mantener tu plan actual o ayudarte a cambiar a uno que se ajuste mejor a tus necesidades.' },
+  { q: '¿Qué datos necesitan para renovar?', a: 'El producto actual (Standard, Plus, Premium, Small Office, etc.), el número de dispositivos y la fecha de vencimiento aproximada.' },
+  { q: '¿La renovación incluye soporte?', a: 'Sí, te apoyamos con la activación y verificación. Si lo necesitas, también con instalación remota o presencial.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/renovar-kaspersky-panama/"
+  title="Renovar licencia Kaspersky en Panamá | Solutech"
+  description="Renueva tu licencia Kaspersky en Panamá con Solutech: hogar, Small Office y empresas. Renovación rápida, licencias originales y soporte local. Cotiza por WhatsApp."
+  h1="Renovar tu licencia Kaspersky en Panamá"
+  intro="¿Tu licencia Kaspersky está por vencer o ya venció? Gestionamos tu renovación de forma rápida, con licencias originales y soporte local. Aplica para hogar, Small Office y empresas."
+  eyebrow="Renovación"
+  breadcrumbName="Renovar"
+  faqs={faqs}
+  waText="Hola, quiero renovar mi licencia Kaspersky. Producto actual: ___. Dispositivos: ___. Vence: ___."
+  ctaHeading="Renueva sin complicaciones"
+  ctaText="Indícanos tu producto actual, número de dispositivos y fecha de vencimiento. Nosotros nos encargamos del resto."
+  ctaLabel="Renovar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <h2>¿Cómo funciona la renovación?</h2>
+      <div class="grid cols-3 mt-3">
+        <article class="card"><div class="title"><Icon name="send" /> 1. Cuéntanos</div><p class="desc" style="margin:0">Envíanos por WhatsApp tu producto actual, dispositivos y fecha de vencimiento.</p></article>
+        <article class="card"><div class="title"><Icon name="receipt" /> 2. Cotizamos</div><p class="desc" style="margin:0">Te enviamos el precio de renovación (con ITBMS si aplica) y los métodos de pago.</p></article>
+        <article class="card"><div class="title"><Icon name="check" /> 3. Activamos</div><p class="desc" style="margin:0">Recibes tu licencia y, si lo necesitas, te ayudamos a activarla en tus equipos.</p></article>
+      </div>
+      <div class="btn-row mt-4">
+        <a class="btn" href="/kaspersky-standard-panama/"><Icon name="home" /> Planes hogar</a>
+        <a class="btn" href="/kaspersky-small-office-security-panama/"><Icon name="briefcase" /> Small Office</a>
+        <a class="btn" href="/kaspersky-endpoint-security-cloud-panama/"><Icon name="cloud" /> Empresas</a>
+      </div>
+    </div>
+  </section>
+</ProductLayout>

@@ -1,0 +1,63 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Para cuántos dispositivos sirve Kaspersky Standard?', a: 'Hay opciones para 1, 3, 5 o 10 dispositivos, por 1 o 2 años. Te ayudamos a elegir la cantidad correcta.' },
+  { q: '¿Funciona en Windows, macOS, Android e iOS?', a: 'Sí, es una protección multiplataforma. La cobertura exacta depende del plan; confírmalo en tu cotización.' },
+  { q: '¿Incluye instalación?', a: 'Podemos incluir instalación remota con tu autorización o presencial en Ciudad de Panamá. Indícanoslo al cotizar.' },
+  { q: '¿Es la versión original?', a: 'Sí, comercializamos licencias originales. Solutech Panamá es un proveedor independiente.' },
+  { q: '¿Kaspersky Standard ralentiza la computadora?', a: 'No de forma perceptible. Kaspersky es reconocido por su bajo impacto en el rendimiento en pruebas independientes; el análisis se optimiza para no interferir con tu trabajo.' },
+  { q: '¿Sirve para proteger a un adulto mayor o usuario básico?', a: 'Sí, es una de las mejores opciones: se instala, se activa y protege en segundo plano sin requerir conocimientos técnicos. Nosotros lo dejamos listo por ti.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-standard-panama/"
+  title="Kaspersky Standard Panamá | Antivirus esencial — Solutech"
+  description="Compra Kaspersky Standard en Panamá: protección esencial multi-dispositivo para hogar. Cotización, licencias originales e instalación con soporte local de Solutech Panamá."
+  h1="Kaspersky Standard en Panamá"
+  intro="Protección esencial para tu PC y dispositivos móviles: antivirus en tiempo real, protección contra phishing y navegación más segura. Ideal para uso personal y del hogar."
+  eyebrow="Hogar"
+  breadcrumbName="Kaspersky Standard"
+  segment="home"
+  match="Kaspersky Standard (LA)"
+  configHeading="Configura tu Kaspersky Standard"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky Standard. Tengo ___ dispositivos por ___ año(s)."
+  ctaHeading="¿Listo para proteger tus equipos?"
+  ctaText="Cotiza Kaspersky Standard con soporte local. Te ayudamos a elegir la cantidad de dispositivos correcta."
+  ctaLabel="Cotizar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="shield" /> ¿Qué es?</div><p class="desc" style="margin:0">La capa de protección esencial de Kaspersky: bloqueo de malware, protección web y defensa frente a amenazas comunes.</p></article>
+        <article class="card"><div class="title"><Icon name="users" /> ¿Para quién es?</div><p class="desc" style="margin:0">Usuarios personales y hogares que quieren una protección confiable y sencilla en uno o varios dispositivos.</p></article>
+        <article class="card"><div class="title"><Icon name="check" /> Diferencias</div><p class="desc" style="margin:0">Es el plan base. <a href="/kaspersky-plus-panama/">Plus</a> añade privacidad y utilidades; <a href="/kaspersky-premium-panama/">Premium</a> suma el nivel más alto de funciones y soporte.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>¿Qué incluye Kaspersky Standard?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Antivirus y antimalware en tiempo real</li>
+            <li><Icon name="check" /> Protección contra phishing y sitios web peligrosos</li>
+            <li><Icon name="check" /> Cortafuegos y monitoreo de red básico</li>
+            <li><Icon name="check" /> Bajo impacto en el rendimiento del equipo</li>
+            <li><Icon name="check" /> Protección para Windows, macOS, Android e iOS (según plan)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> ¿Para quién es ideal?</div>
+          <p class="desc">Ideal para usuarios personales y hogares que buscan una protección sólida y sencilla para uno o varios dispositivos, sin funciones avanzadas que no van a usar.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">¿Dudas sobre cuál elegir? Escríbenos y te asesoramos sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

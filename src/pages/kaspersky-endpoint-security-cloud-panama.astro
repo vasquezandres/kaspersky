@@ -1,0 +1,63 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Qué es Endpoint Security Cloud?', a: 'Es la solución de Kaspersky para empresas con gestión centralizada en la nube: administras la seguridad de todos los equipos desde una consola web, sin servidor local.' },
+  { q: '¿Cuántos equipos cubre?', a: 'Desde 10 hasta cientos de equipos. Existen ediciones Cloud, Cloud Plus y Cloud Pro según las funciones requeridas.' },
+  { q: '¿Cuál es la diferencia entre Cloud, Plus y Pro?', a: 'Cloud es la base; Plus amplía capacidades para equipos de TI; Pro añade protección avanzada y funciones para flotas grandes y servidores. Te asesoramos según tu caso.' },
+  { q: '¿Solutech ayuda con la implementación?', a: 'Sí. Te apoyamos en el despliegue, la configuración de políticas y el soporte continuo.' },
+  { q: '¿Incluye protección de móviles?', a: 'Sí, la gestión cubre endpoints y dispositivos móviles según la edición.' },
+  { q: '¿Necesito un servidor para Endpoint Security Cloud?', a: 'No. Toda la administración es en la nube mediante una consola web; no requieres instalar ni mantener un servidor local.' },
+  { q: '¿Qué edición me conviene: Cloud, Plus o Pro?', a: 'Depende de las funciones que necesites (EDR, cifrado, parches, control avanzado). Cuéntanos tu escenario y te recomendamos la edición correcta sin que pagues de más.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-endpoint-security-cloud-panama/"
+  title="Kaspersky Endpoint Security Cloud Panamá | Empresas — Solutech"
+  description="Kaspersky Endpoint Security Cloud en Panamá: protección empresarial con gestión centralizada en la nube para 10+ equipos. Ediciones Cloud, Plus y Pro. Cotización y soporte local."
+  h1="Kaspersky Endpoint Security Cloud en Panamá"
+  intro="Protección empresarial administrada desde la nube: gestiona la seguridad de todos tus equipos y móviles desde una sola consola, sin servidor local. Ideal para empresas en crecimiento."
+  eyebrow="Empresas / B2B"
+  breadcrumbName="Endpoint Security Cloud"
+  segment="business"
+  configHeading="Configura tu Endpoint Security Cloud"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky Endpoint Security Cloud para ___ equipos."
+  ctaHeading="Seguridad empresarial en la nube"
+  ctaText="Cuéntanos cuántos equipos tienes y te recomendamos la edición correcta (Cloud, Plus o Pro) con soporte de implementación."
+  ctaLabel="Hablar con un especialista"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="cloud" /> Gestión centralizada</div><p class="desc" style="margin:0">Una consola web para administrar la seguridad de todos los equipos y móviles de la empresa.</p></article>
+        <article class="card"><div class="title"><Icon name="building" /> Para empresas</div><p class="desc" style="margin:0">Desde 10 equipos en adelante, con ediciones que escalan a cientos de dispositivos y servidores.</p></article>
+        <article class="card"><div class="title"><Icon name="tools" /> Implementación incluida</div><p class="desc" style="margin:0">Solutech Panamá te acompaña en el despliegue, las políticas de seguridad y el soporte continuo.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>¿Qué incluye Endpoint Security Cloud?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Consola de administración web centralizada (sin servidor local)</li>
+            <li><Icon name="check" /> Protección de estaciones de trabajo, servidores y móviles</li>
+            <li><Icon name="check" /> Control de dispositivos y de acceso web</li>
+            <li><Icon name="check" /> Funciones avanzadas según edición (Cloud, Plus, Pro)</li>
+            <li><Icon name="check" /> Despliegue y soporte de implementación por Solutech</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> ¿Para quién es ideal?</div>
+          <p class="desc">Ideal para empresas en crecimiento que necesitan gestionar la seguridad de todos sus equipos desde un solo lugar, con políticas centralizadas y sin infraestructura local.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">¿Dudas sobre cuál elegir? Escríbenos y te asesoramos sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

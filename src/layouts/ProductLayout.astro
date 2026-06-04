@@ -1,0 +1,99 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import DisclaimerBanner from '../components/DisclaimerBanner.astro';
+import FAQ from '../components/FAQ.astro';
+import FaqJsonLd from '../components/FaqJsonLd.astro';
+import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
+import ServiceJsonLd from '../components/ServiceJsonLd.astro';
+import Icon from '../components/Icon.astro';
+import { site, waLink } from '../data/site';
+import { ui, type Lang } from '../data/i18n';
+
+interface Props {
+  lang: Lang;
+  esPath: string;
+  title: string;
+  description: string;
+  h1: string;
+  intro: string;
+  eyebrow?: string;
+  breadcrumbName: string;
+  /** Si se define, monta el configurador de precios de ese segmento. */
+  segment?: 'home' | 'smalloffice' | 'business';
+  match?: string;
+  configHeading?: string;
+  faqs?: Array<{ q: string; a: string }>;
+  waText: string;
+  ctaHeading: string;
+  ctaText: string;
+  ctaLabel: string;
+}
+const {
+  lang, esPath, title, description, h1, intro, eyebrow,
+  breadcrumbName, segment, match, configHeading, faqs = [],
+  waText, ctaHeading, ctaText, ctaLabel,
+} = Astro.props;
+
+const t = ui[lang];
+const isEs = lang === 'es';
+const homeHref = isEs ? '/' : '/en/';
+const homeName = isEs ? 'Inicio' : 'Home';
+const quoteBase = isEs ? '/cotizar/' : '/en/quote/';
+const canonicalPath = isEs ? esPath : esPath; // SEO usa esPath internamente
+---
+<BaseLayout {lang} {esPath} {title} {description} type="article">
+  <Fragment slot="jsonld">
+    <BreadcrumbJsonLd items={[{ name: homeName, path: homeHref }, { name: breadcrumbName, path: Astro.url.pathname }]} />
+    <ServiceJsonLd name={h1} description={description} />
+    {faqs.length > 0 && <FaqJsonLd items={faqs.map((f) => ({ q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))} />}
+  </Fragment>
+
+  <section class="section tight">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href={homeHref}>{homeName}</a> &nbsp;/&nbsp; <span>{breadcrumbName}</span>
+      </nav>
+      {eyebrow && <span class="eyebrow" style="margin-top:18px">{eyebrow}</span>}
+      <h1>{h1}</h1>
+      <p class="lead">{intro}</p>
+      <div class="btn-row mt-2">
+        <a class="btn primary lg" href={waLink(waText)} target="_blank" rel="noopener"><Icon name="whatsapp" /> {t.quoteWhatsApp}</a>
+        <a class="btn lg" href={quoteBase}>{t.quote}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight"><div class="container"><DisclaimerBanner {lang} /></div></section>
+
+  {segment && (
+    <section class="section">
+      <div class="container">
+        <h2>{configHeading}</h2>
+        <div class="grid cols-3 mt-3"
+          data-pricing data-segment={segment} data-lang={lang}
+          data-sheet-id={site.sheetId} data-sheet={site.defaultSheet} data-quote={quoteBase}
+          data-match={match}>
+          <p class="muted">{isEs ? 'Cargando…' : 'Loading…'}</p>
+        </div>
+        <p class="muted mt-3" style="font-size:.86rem">{t.priceNote}</p>
+      </div>
+    </section>
+  )}
+
+  <slot />
+
+  {faqs.length > 0 && <FAQ heading={isEs ? 'Preguntas frecuentes' : 'Frequently asked questions'} items={faqs} id="faq" />}
+
+  <section class="section bg-alt">
+    <div class="container center">
+      <h2>{ctaHeading}</h2>
+      <p class="lead center" style="margin:0 auto 24px">{ctaText}</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn primary lg" href={waLink(waText)} target="_blank" rel="noopener"><Icon name="whatsapp" /> {ctaLabel}</a>
+        <a class="btn lg" href={quoteBase}>{t.quote}</a>
+      </div>
+    </div>
+  </section>
+
+  {segment && <script type="module" src="/scripts/pricing.js"></script>}
+</BaseLayout>

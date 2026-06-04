@@ -1,0 +1,59 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'What business size is it for?', a: 'For small businesses and offices, from 5 to 99 devices. It protects desktops, mobiles and servers depending on the package.' },
+  { q: 'Is it licensed by devices or by nodes?', a: 'Two ways: by fixed device packs (5, 10, 15, 20, 25, 50) and by node ranges (5–9, 10–14, …, 50–99). The configurator shows both depending on the product.' },
+  { q: 'Does it include server protection?', a: 'Yes. The number of servers included varies by pack or range; the configurator indicates it.' },
+  { q: 'Do I need technical knowledge to manage it?', a: 'It is designed to be simple. Solutech Panamá also helps with installation, initial setup and support.' },
+  { q: 'Do you issue invoices with ITBMS for businesses?', a: 'Yes. Include your tax ID details when quoting and we issue the corresponding invoice.' },
+  { q: 'How do I know how many licenses I need?', a: 'Count each computer, laptop, work phone and server you want to protect. On this page you can adjust the quantity and see the estimated total; if you have servers, we build the exact combination.' },
+  { q: 'Can I start small and grow later?', a: 'Yes. You can start with your current device count and expand coverage as your business grows.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-small-office-security-panama/"
+  title="Kaspersky Small Office Security Panama | SMBs — Solutech"
+  description="Kaspersky Small Office Security in Panama for small businesses: protect devices, mobiles and servers from 5 to 99 nodes. Quotes, licenses and installation with local support."
+  h1="Kaspersky Small Office Security in Panama"
+  intro="Security built for small businesses and offices: protect computers, mobiles and servers without a dedicated IT team. Available by device packs or node ranges (5–99)."
+  eyebrow="Small Office / SMB"
+  breadcrumbName="Small Office Security"
+  segment="smalloffice"
+  configHeading="Configure your Small Office Security"
+  faqs={faqs}
+  waText="Hi, I'd like a quote for Kaspersky Small Office Security. I have ___ devices and ___ server(s)."
+  ctaHeading="Protect your small business"
+  ctaText="We help you size the license based on your devices and servers, with installation and local support."
+  ctaLabel="Quote on WhatsApp"
+>
+  <section class="section"><div class="container"><div class="grid cols-3">
+    <article class="card"><div class="title"><Icon name="briefcase" /> What is it?</div><p class="desc" style="margin:0">A security solution for small businesses: protects workstations, mobiles and servers in a single product.</p></article>
+    <article class="card"><div class="title"><Icon name="building" /> Who is it for?</div><p class="desc" style="margin:0">Businesses and offices of 5 to 99 devices needing professional protection without complexity.</p></article>
+    <article class="card"><div class="title"><Icon name="cloud" /> Bigger than that?</div><p class="desc" style="margin:0">For larger fleets or centralized cloud management, see <a href="/en/kaspersky-endpoint-security-cloud-panama/">Endpoint Security Cloud</a>.</p></article>
+  </div></div></section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>What does Small Office Security include?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Protection for computers (Windows and Mac) and mobiles</li>
+            <li><Icon name="check" /> File server protection</li>
+            <li><Icon name="check" /> Security for company payments and online banking</li>
+            <li><Icon name="check" /> File encryption and backup</li>
+            <li><Icon name="check" /> Simple console, no dedicated IT administrator required</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> Who is it ideal for?</div>
+          <p class="desc">Ideal for small businesses, shops and offices of 5 to 99 devices needing professional protection without the complexity of a corporate solution.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">Not sure which to choose? Message us and we will advise you with no obligation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

@@ -1,0 +1,88 @@
+---
+import { site } from '../data/site';
+import { ui, footerBrandNote, type Lang, toEn } from '../data/i18n';
+import Icon from './Icon.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang];
+const isEs = lang === 'es';
+const year = new Date().getFullYear();
+
+const links = isEs
+  ? {
+      products: 'Productos',
+      company: 'Empresa',
+      contact: 'Contacto',
+      home: 'Hogar', smalloffice: 'Small Office', business: 'Empresas',
+      support: 'Soporte', renew: 'Renovar', payments: 'Pagos',
+      mainSite: 'Solutech Panamá',
+    }
+  : {
+      products: 'Products',
+      company: 'Company',
+      contact: 'Contact',
+      home: 'Home users', smalloffice: 'Small Office', business: 'Business',
+      support: 'Support', renew: 'Renew', payments: 'Payments',
+      mainSite: 'Solutech Panamá',
+    };
+
+const p = (es: string, en: string) => (isEs ? es : en);
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand-link" href={isEs ? '/' : '/en/'}>
+          <span class="brand-mark">S</span>
+          <span>Solutech Panamá<small>Licencias Kaspersky</small></span>
+        </a>
+        <p class="muted mt-2" style="font-size:.9rem">
+          {p(
+            'Proveedor independiente de licencias Kaspersky en Panamá. Cotización, renovación, instalación y soporte técnico local.',
+            'Independent provider of Kaspersky licenses in Panama. Quotes, renewals, installation and local technical support.'
+          )}
+        </p>
+      </div>
+
+      <div>
+        <h4>{links.products}</h4>
+        <ul>
+          <li><a href={p('/kaspersky-hogar-panama/', '/en/kaspersky-home-panama/')}>{links.home}</a></li>
+          <li><a href={p('/kaspersky-small-office-security-panama/', '/en/kaspersky-small-office-security-panama/')}>{links.smalloffice}</a></li>
+          <li><a href={p('/kaspersky-endpoint-security-cloud-panama/', '/en/kaspersky-endpoint-security-cloud-panama/')}>{links.business}</a></li>
+          <li><a href={p('/renovar-kaspersky-panama/', '/en/renew-kaspersky-panama/')}>{links.renew}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>{links.company}</h4>
+        <ul>
+          <li><a href={p('/soporte-kaspersky-panama/', '/en/kaspersky-support-panama/')}>{links.support}</a></li>
+          <li><a href={p('/pagos/', '/en/payment-methods/')}>{links.payments}</a></li>
+          <li><a href={p('/aviso-legal/', '/en/legal-notice/')}>{t.legalNotice}</a></li>
+          <li><a href={p('/politica-de-privacidad/', '/en/privacy-policy/')}>{t.privacy}</a></li>
+          <li><a href={site.mainSiteUrl} target="_blank" rel="noopener">{links.mainSite}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>{links.contact}</h4>
+        <ul>
+          <li><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">WhatsApp {site.whatsappDisplay}</a></li>
+          <li><a href={site.phoneAltTel ? `tel:${site.phoneAltTel}` : '#'}>{site.phoneAlt}</a></li>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        </ul>
+        <ul class="mt-2">
+          <li><a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-note">{footerBrandNote[lang]}</p>
+      <p class="muted" style="font-size:.82rem">© {year} Solutech Panamá — {t.rights}</p>
+    </div>
+  </div>
+</footer>

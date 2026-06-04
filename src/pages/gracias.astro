@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site, waLink } from '../data/site';
+const lang = 'es' as const;
+---
+<BaseLayout
+  lang={lang}
+  esPath="/gracias/"
+  title="¡Gracias! | Kaspersky Panamá — Solutech"
+  description="Recibimos tu mensaje. Te contactaremos pronto para tu cotización de licencias Kaspersky en Panamá."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container center" style="max-width:640px">
+      <div class="brand-mark" style="width:64px;height:64px;font-size:2rem;margin:0 auto 20px">✓</div>
+      <h1>¡Gracias por escribirnos!</h1>
+      <p class="lead center" style="margin:0 auto 24px">Recibimos tu mensaje y te contactaremos pronto en horario laboral. Si es urgente, escríbenos directamente por WhatsApp.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn primary lg" href={waLink('Hola, acabo de enviar el formulario en kasperskypanama.com.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Escribir por WhatsApp</a>
+        <a class="btn lg" href="/"><Icon name="home" /> Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

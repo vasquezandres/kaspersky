@@ -1,0 +1,14 @@
+---
+import { site, waLink } from '../data/site';
+import { type Lang } from '../data/i18n';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const text = lang === 'es'
+  ? 'Hola, quiero cotizar una licencia Kaspersky. Tengo ___ equipos y necesito saber cuál plan me conviene.'
+  : 'Hi, I would like to request a quote for a Kaspersky license. I have ___ devices and would like to know which plan is best for me.';
+---
+<a class="fab-whatsapp" href={waLink(text)} target="_blank" rel="noopener"
+   aria-label={lang === 'es' ? 'Cotizar por WhatsApp' : 'Quote on WhatsApp'}>
+  <Icon name="whatsapp" />
+</a>

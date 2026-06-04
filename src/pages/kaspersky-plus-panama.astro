@@ -1,0 +1,63 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Qué añade Plus respecto a Standard?', a: 'A grandes rasgos, suma funciones de privacidad y utilidades de rendimiento además de la protección esencial. Te detallamos el alcance al cotizar.' },
+  { q: '¿Para cuántos dispositivos está disponible?', a: 'Opciones de 1, 3, 5 o 10 dispositivos por 1 o 2 años.' },
+  { q: '¿Sirve para familias?', a: 'Sí, es una buena opción multi-dispositivo. Para control parental específico también existe Safe Kids.' },
+  { q: '¿Las licencias son originales?', a: 'Sí. Solutech Panamá comercializa licencias Kaspersky originales de forma independiente.' },
+  { q: '¿La VPN de Kaspersky Plus tiene límite?', a: 'El alcance de la VPN depende de la edición vigente del producto. Te confirmamos los detalles exactos al cotizar para que sepas qué incluye tu licencia.' },
+  { q: '¿Vale la pena Plus sobre Standard?', a: 'Si te conectas a redes públicas o manejas datos sensibles, sí: la privacidad y las utilidades adicionales justifican la diferencia. Si solo quieres antivirus, Standard puede bastar.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-plus-panama/"
+  title="Kaspersky Plus Panamá | Antivirus con privacidad — Solutech"
+  description="Compra Kaspersky Plus en Panamá: protección esencial más privacidad y utilidades de rendimiento, multi-dispositivo. Cotización e instalación con soporte local de Solutech."
+  h1="Kaspersky Plus en Panamá"
+  intro="Toda la protección de Standard más funciones de privacidad y utilidades para mantener tus equipos rápidos y seguros. Pensado para quienes quieren un paso adicional de protección."
+  eyebrow="Hogar"
+  breadcrumbName="Kaspersky Plus"
+  segment="home"
+  match="Kaspersky Plus (LA)"
+  configHeading="Configura tu Kaspersky Plus"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky Plus. Tengo ___ dispositivos por ___ año(s)."
+  ctaHeading="Protección con privacidad incluida"
+  ctaText="Cotiza Kaspersky Plus y te asesoramos según tus dispositivos."
+  ctaLabel="Cotizar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="shield" /> ¿Qué es?</div><p class="desc" style="margin:0">Protección esencial más capas de privacidad y utilidades de rendimiento, en un solo plan multi-dispositivo.</p></article>
+        <article class="card"><div class="title"><Icon name="users" /> ¿Para quién es?</div><p class="desc" style="margin:0">Usuarios que quieren proteger su privacidad y optimizar sus equipos, además del antivirus.</p></article>
+        <article class="card"><div class="title"><Icon name="check" /> Diferencias</div><p class="desc" style="margin:0">Está entre <a href="/kaspersky-standard-panama/">Standard</a> y <a href="/kaspersky-premium-panama/">Premium</a>, que ofrece el nivel más completo.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>¿Qué incluye Kaspersky Plus?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Todo lo de Kaspersky Standard</li>
+            <li><Icon name="check" /> VPN para navegación más privada y segura</li>
+            <li><Icon name="check" /> Funciones de privacidad y protección de datos</li>
+            <li><Icon name="check" /> Utilidades de optimización y rendimiento</li>
+            <li><Icon name="check" /> Soporte e instalación local incluido por Solutech</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> ¿Para quién es ideal?</div>
+          <p class="desc">Ideal para quienes usan banca en línea, compran por internet o se conectan a redes Wi-Fi públicas y quieren una capa extra de privacidad además del antivirus.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">¿Dudas sobre cuál elegir? Escríbenos y te asesoramos sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

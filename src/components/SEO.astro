@@ -1,0 +1,56 @@
+---
+import { site } from '../data/site';
+import { type Lang, toEn, localeTag, ogLocale } from '../data/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Ruta canónica ES de la página (clave de routePairs), p.ej. "/pagos/". */
+  esPath: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang,
+  esPath,
+  image = '/assets/img/og/kaspersky-panama-solutech.svg',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const enPath = toEn(esPath);
+const urlEs = site.baseUrl + esPath;
+const urlEn = site.baseUrl + enPath;
+const canonical = lang === 'es' ? urlEs : urlEn;
+const ogImage = image.startsWith('http') ? image : site.baseUrl + image;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,follow" />}
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="es-PA" href={urlEs} />
+<link rel="alternate" hreflang="en" href={urlEn} />
+<link rel="alternate" hreflang="x-default" href={urlEs} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={ogLocale[lang]} />
+<meta property="og:locale:alternate" content={lang === 'es' ? ogLocale.en : ogLocale.es} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+const lang = 'es' as const;
+const updated = '2026';
+---
+<BaseLayout
+  lang={lang}
+  esPath="/politica-de-privacidad/"
+  title="Política de privacidad | Solutech Panamá — Kaspersky"
+  description="Política de privacidad de Solutech Panamá: qué datos recogemos al solicitar una cotización de Kaspersky, cómo los usamos y tus derechos conforme a la Ley 81 de 2019 de Panamá."
+>
+  <section class="section">
+    <div class="container prose">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="/">Inicio</a> &nbsp;/&nbsp; <span>Política de privacidad</span></nav>
+      <h1>Política de privacidad</h1>
+      <p class="muted">Última actualización: {updated}</p>
+
+      <p>En <strong>Solutech Panamá</strong> respetamos tu privacidad. Esta política explica qué datos personales tratamos cuando usas <strong>kasperskypanama.com</strong> o nos solicitas una cotización, y cómo los protegemos, en línea con la <strong>Ley 81 de 2019</strong> sobre Protección de Datos Personales de la República de Panamá.</p>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>Solutech Panamá, Ciudad de Panamá. Contacto para asuntos de privacidad: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>2. Datos que recogemos</h2>
+      <ul>
+        <li>Datos que nos proporcionas en el formulario de contacto o cotización: nombre, correo electrónico, empresa/RUC (opcional) y el mensaje o detalle de tu solicitud.</li>
+        <li>Datos que compartes voluntariamente por WhatsApp o correo al cotizar o solicitar soporte.</li>
+      </ul>
+      <p>No solicitamos contraseñas de banca en línea ni datos financieros sensibles a través del sitio.</p>
+
+      <h2>3. Finalidad</h2>
+      <ul>
+        <li>Responder tus consultas y elaborar cotizaciones.</li>
+        <li>Gestionar la venta, renovación, instalación y soporte de licencias.</li>
+        <li>Emitir la factura correspondiente cuando realices una compra.</li>
+      </ul>
+      <p>No vendemos tus datos personales a terceros.</p>
+
+      <h2>4. Proveedores que tratan datos por nosotros</h2>
+      <p>El formulario de contacto se procesa mediante <strong>Formspree</strong>, que reenvía tu mensaje a nuestro correo. La comunicación por WhatsApp se realiza a través de Meta Platforms. Estos proveedores tratan los datos conforme a sus propias políticas. El sitio se aloja en Cloudflare Pages.</p>
+
+      <h2>5. Conservación</h2>
+      <p>Conservamos tus datos el tiempo necesario para atender tu solicitud y cumplir obligaciones legales o fiscales aplicables en Panamá.</p>
+
+      <h2>6. Tus derechos</h2>
+      <p>Conforme a la Ley 81 de 2019, puedes solicitar el acceso, rectificación, cancelación u oposición respecto de tus datos personales escribiéndonos a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>7. Cookies y analítica</h2>
+      <p>Este sitio busca minimizar el uso de cookies. Si en el futuro incorporamos herramientas de analítica, lo haremos priorizando opciones respetuosas con la privacidad y actualizaremos esta política.</p>
+
+      <h2>8. Cambios</h2>
+      <p>Podemos actualizar esta política. Publicaremos cualquier cambio en esta misma página con su fecha de actualización.</p>
+
+      <p class="mt-3"><a href="/aviso-legal/">Ver aviso legal →</a></p>
+    </div>
+  </section>
+</BaseLayout>

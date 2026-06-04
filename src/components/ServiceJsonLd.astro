@@ -1,0 +1,15 @@
+---
+import { site } from '../data/site';
+interface Props { name: string; description: string; serviceType?: string; }
+const { name, description, serviceType = 'Software licensing & IT support' } = Astro.props;
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name,
+  description,
+  serviceType,
+  provider: { '@id': site.baseUrl + '/#solutech' },
+  areaServed: { '@type': 'Country', name: 'Panama' },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

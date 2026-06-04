@@ -1,0 +1,57 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const tools = [
+  { name: 'AnyDesk', img: '/assets/img/tools/anydesk.webp', desc: 'Fast and stable, ideal for quick support.' },
+  { name: 'RustDesk', img: '/assets/img/tools/rustdesk.webp', desc: 'Open source, privacy-focused.' },
+  { name: 'HopToDesk', img: '/assets/img/tools/hoptodesk.webp', desc: 'Free and cross-platform, lightweight.' },
+];
+const services = [
+  'Kaspersky installation and activation', 'Virus and malware removal', 'Removal of previous antivirus',
+  'Migration between security solutions', 'Basic protection setup', 'Basic device performance check',
+  'Support for businesses and servers', 'Advice to choose the right plan',
+];
+const faqs = [
+  { q: 'How does remote installation work?', a: 'We use tools like AnyDesk, RustDesk or HopToDesk. <strong>The session is temporary and you authorize it</strong>: you grant access only during support and can end it anytime. We do not store access or passwords.' },
+  { q: 'Do you offer on-site support?', a: 'Yes, we offer on-site support in Panama City and remote support nationwide.' },
+  { q: 'Do you charge only for the license or also for support?', a: 'License sales and support can be quoted separately or together. We make it clear in the quote.' },
+  { q: 'Do you ask for passwords?', a: 'No. We never ask for banking passwords or sensitive data. You control remote access during the session.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/soporte-kaspersky-panama/"
+  title="Kaspersky support & installation in Panama | Solutech"
+  description="Kaspersky installation and technical support in Panama: remote or on-site installation, virus removal, migration and setup. Local support from Solutech Panamá."
+  h1="Kaspersky support & installation in Panama"
+  intro="We don't just sell licenses: we help you install, activate and leave your devices protected. Remote installation (with your authorization) or on-site in Panama City."
+  eyebrow="Services"
+  breadcrumbName="Support & installation"
+  faqs={faqs}
+  waText="Hi, I need Kaspersky support/installation. Details: ___."
+  ctaHeading="Need help with your Kaspersky?"
+  ctaText="Contact us and we'll arrange installation or support, remotely or on-site."
+  ctaLabel="Request support on WhatsApp"
+>
+  <section class="section"><div class="container">
+    <h2>Support services</h2>
+    <div class="grid cols-2 mt-3">
+      <article class="card"><ul class="list">{services.map((s) => (<li><Icon name="check" /> {s}</li>))}</ul></article>
+      <article class="card">
+        <div class="title"><Icon name="lock" /> Secure remote access</div>
+        <p class="desc">Remote support is performed <strong>only with your explicit authorization</strong>. The session is temporary, you control it and can end it at any time. We do not store access or ask for banking passwords.</p>
+        <p class="muted" style="font-size:.86rem;margin:0">Tools we use:</p>
+        <div class="tools-grid">
+          {tools.map((tool) => (
+            <div class="tool">
+              <img src={tool.img} alt={`${tool.name} — remote support tool`} width="46" height="46" loading="lazy" />
+              <span class="tname">{tool.name}</span>
+              <p class="tdesc">{tool.desc}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+    </div>
+  </div></section>
+</ProductLayout>

@@ -1,0 +1,42 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Cuál Kaspersky es mejor para mi hogar?', a: 'Para uso básico, <strong>Standard</strong>; si te conectas a redes públicas o valoras la privacidad, <strong>Plus</strong>; para la cobertura más completa y varios dispositivos, <strong>Premium</strong>. También hay productos puntuales como Safe Kids (control parental), Password Manager, VPN y protección para móviles.' },
+  { q: '¿Puedo combinar varios productos?', a: 'Sí. Por ejemplo, un plan Premium para tus equipos más Safe Kids para los niños. Te ayudamos a armar la combinación ideal.' },
+  { q: '¿Las licencias sirven para Windows, Mac, Android e iOS?', a: 'Según el producto, sí. La cobertura exacta depende del plan; te la confirmamos al cotizar.' },
+  { q: '¿Incluye instalación?', a: 'Podemos incluir instalación remota (con tu autorización) o presencial en Ciudad de Panamá. Indícanoslo al cotizar.' },
+  { q: '¿Cómo recibo la licencia?', a: 'Por correo/WhatsApp el mismo día, una vez confirmado el pago. Si lo necesitas, te ayudamos a activarla.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-hogar-panama/"
+  title="Kaspersky para el hogar en Panamá | Todas las opciones — Solutech"
+  description="Todas las licencias Kaspersky para el hogar en Panamá: Standard, Plus, Premium, Safe Kids, Password Manager, VPN y protección móvil. Cotiza e instala con soporte local de Solutech."
+  h1="Kaspersky para el hogar en Panamá"
+  intro="Protege tu casa digital: antivirus para tus equipos, control parental, gestor de contraseñas, VPN y seguridad para celulares. Aquí están todas las opciones de hogar; ajusta dispositivos y años para ver el precio."
+  eyebrow="Hogar"
+  breadcrumbName="Hogar"
+  segment="home"
+  configHeading="Antivirus y productos Kaspersky para el hogar"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky para mi hogar. Tengo ___ dispositivos."
+  ctaHeading="¿No sabes cuál elegir?"
+  ctaText="Cuéntanos cuántos equipos tienes y qué quieres proteger; te recomendamos la opción correcta para tu hogar."
+  ctaLabel="Cotizar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card hover"><div class="title"><Icon name="shield" /> Antivirus (Standard/Plus/Premium)</div><p class="desc" style="margin:0">Protección esencial a completa para tus computadoras y dispositivos. <a href="/kaspersky-standard-panama/">Standard</a>, <a href="/kaspersky-plus-panama/">Plus</a> y <a href="/kaspersky-premium-panama/">Premium</a>.</p></article>
+        <article class="card hover"><div class="title"><Icon name="users" /> Safe Kids — control parental</div><p class="desc" style="margin:0">Supervisa y protege la actividad de los niños en sus dispositivos.</p></article>
+        <article class="card hover"><div class="title"><Icon name="lock" /> Password Manager</div><p class="desc" style="margin:0">Guarda y autocompleta contraseñas de forma segura en todos tus dispositivos.</p></article>
+        <article class="card hover"><div class="title"><Icon name="globe" /> VPN Secure Connection</div><p class="desc" style="margin:0">Navegación más privada y segura, especialmente en redes Wi-Fi públicas.</p></article>
+        <article class="card hover"><div class="title"><Icon name="phone" /> Protección para móviles</div><p class="desc" style="margin:0">Seguridad dedicada para Android e iOS (Mobile Standard y Premium).</p></article>
+        <article class="card hover"><div class="title"><Icon name="briefcase" /> ¿Es para tu empresa?</div><p class="desc" style="margin:0">Si necesitas proteger varios equipos de trabajo, mira <a href="/kaspersky-small-office-security-panama/">Small Office Security</a>.</p></article>
+      </div>
+    </div>
+  </section>
+</ProductLayout>

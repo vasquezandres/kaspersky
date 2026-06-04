@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+const lang = 'es' as const;
+const updated = '2026';
+---
+<BaseLayout
+  lang={lang}
+  esPath="/aviso-legal/"
+  title="Aviso legal | Solutech Panamá — Licencias Kaspersky"
+  description="Aviso legal de Solutech Panamá, proveedor independiente de licencias Kaspersky en Panamá. Información sobre marcas, independencia y términos de uso del sitio."
+>
+  <section class="section">
+    <div class="container prose">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="/">Inicio</a> &nbsp;/&nbsp; <span>Aviso legal</span></nav>
+      <h1>Aviso legal</h1>
+      <p class="muted">Última actualización: {updated}</p>
+
+      <h2>1. Identificación</h2>
+      <p>Este sitio web (<strong>kasperskypanama.com</strong>) es operado por <strong>Solutech Panamá</strong>, empresa de servicios y soporte de tecnología con sede en Ciudad de Panamá, República de Panamá. Contacto: <a href={`mailto:${site.email}`}>{site.email}</a> · WhatsApp {site.whatsappDisplay}.</p>
+
+      <h2>2. Carácter independiente — no es un sitio oficial</h2>
+      <p>Solutech Panamá es un <strong>proveedor y revendedor independiente</strong> de soluciones de software de seguridad, incluidas licencias de la marca Kaspersky. <strong>Este sitio no es el sitio oficial de Kaspersky</strong>, no pertenece a AO Kaspersky Lab ni a sus filiales, y <strong>no representa de forma oficial</strong> a dicha compañía.</p>
+      <p>El uso del término “Kaspersky” en este sitio y en el nombre de dominio es exclusivamente <strong>descriptivo y referencial</strong>, para indicar los productos que comercializamos y sobre los cuales brindamos soporte. No implica afiliación, patrocinio, autorización oficial ni representación.</p>
+
+      <h2>3. Marcas registradas</h2>
+      <p>“Kaspersky” y los logotipos, nombres de productos y signos distintivos asociados son <strong>marcas de sus respectivos propietarios</strong> (AO Kaspersky Lab y/o sus titulares). Todas las demás marcas mencionadas pertenecen a sus respectivos titulares. Su mención no constituye reclamo de propiedad por parte de Solutech Panamá.</p>
+
+      <h2>4. Productos, precios y disponibilidad</h2>
+      <p>Los productos mostrados corresponden a licencias originales. Los precios indicados son <strong>referenciales en dólares de los Estados Unidos (USD)</strong> y pueden variar por disponibilidad, promociones, cambios del proveedor y aplicación del Impuesto de Transferencia de Bienes Muebles y Servicios (ITBMS) cuando corresponda. El precio final se confirma en la cotización.</p>
+
+      <h2>5. Servicios de soporte</h2>
+      <p>Los servicios de instalación y soporte remoto se prestan <strong>únicamente con la autorización expresa del cliente</strong>, mediante herramientas de acceso remoto controladas por el usuario durante la sesión. Solutech Panamá no almacena accesos ni solicita contraseñas de banca en línea ni datos sensibles.</p>
+
+      <h2>6. Limitación de responsabilidad</h2>
+      <p>La información de este sitio se ofrece de buena fe y con fines informativos. Solutech Panamá no garantiza que el contenido esté libre de errores u omisiones y no será responsable por daños derivados del uso del sitio. Los enlaces a sitios de terceros se ofrecen por conveniencia y no implican respaldo.</p>
+
+      <h2>7. Propiedad del sitio</h2>
+      <p>El diseño, los textos y demás contenidos propios de este sitio pertenecen a Solutech Panamá, salvo las marcas y materiales de terceros indicados. No está permitida su reproducción sin autorización.</p>
+
+      <h2>8. Legislación aplicable</h2>
+      <p>Este aviso legal se rige por las leyes de la República de Panamá. Para cualquier consulta, escríbenos a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <p class="mt-3"><a href="/politica-de-privacidad/">Ver política de privacidad →</a></p>
+    </div>
+  </section>
+</BaseLayout>

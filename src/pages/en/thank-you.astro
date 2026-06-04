@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { waLink } from '../../data/site';
+const lang = 'en' as const;
+---
+<BaseLayout lang={lang} esPath="/gracias/"
+  title="Thank you! | Kaspersky Panama — Solutech"
+  description="We received your message. We'll contact you soon about your Kaspersky license quote in Panama."
+  noindex={true}>
+  <section class="section">
+    <div class="container center" style="max-width:640px">
+      <div class="brand-mark" style="width:64px;height:64px;font-size:2rem;margin:0 auto 20px">✓</div>
+      <h1>Thanks for reaching out!</h1>
+      <p class="lead center" style="margin:0 auto 24px">We received your message and will contact you soon during business hours. If it's urgent, message us directly on WhatsApp.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn primary lg" href={waLink('Hi, I just submitted the form on kasperskypanama.com.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Message on WhatsApp</a>
+        <a class="btn lg" href="/en/"><Icon name="home" /> Back to home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

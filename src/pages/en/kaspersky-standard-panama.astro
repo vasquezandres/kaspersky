@@ -1,0 +1,59 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'How many devices does Kaspersky Standard cover?', a: 'Options for 1, 3, 5 or 10 devices, for 1 or 2 years. We help you pick the right amount.' },
+  { q: 'Does it work on Windows, macOS, Android and iOS?', a: 'Yes, it is multi-platform protection. Exact coverage depends on the plan; we confirm it in your quote.' },
+  { q: 'Is installation included?', a: 'We can include remote installation (with your authorization) or on-site in Panama City. Just let us know when requesting a quote.' },
+  { q: 'Is it the original version?', a: 'Yes, we sell original licenses. Solutech Panamá is an independent provider.' },
+  { q: 'Does Kaspersky Standard slow down the computer?', a: 'Not noticeably. Kaspersky is known for its low performance impact in independent tests; scanning is optimized so it does not interfere with your work.' },
+  { q: 'Is it suitable for an older or basic user?', a: 'Yes, it is one of the best options: it installs, activates and protects in the background with no technical knowledge required. We set it up for you.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-standard-panama/"
+  title="Kaspersky Standard Panama | Essential antivirus — Solutech"
+  description="Buy Kaspersky Standard in Panama: essential multi-device protection for home. Quotes, original licenses and installation with local support from Solutech Panamá."
+  h1="Kaspersky Standard in Panama"
+  intro="Essential protection for your PC and mobile devices: real-time antivirus, anti-phishing and safer browsing. Ideal for personal and home use."
+  eyebrow="Home"
+  breadcrumbName="Kaspersky Standard"
+  segment="home"
+  match="Kaspersky Standard (LA)"
+  configHeading="Configure your Kaspersky Standard"
+  faqs={faqs}
+  waText="Hi, I'd like a quote for Kaspersky Standard. I have ___ devices for ___ year(s)."
+  ctaHeading="Ready to protect your devices?"
+  ctaText="Get a quote for Kaspersky Standard with local support. We help you choose the right number of devices."
+  ctaLabel="Quote on WhatsApp"
+>
+  <section class="section"><div class="container"><div class="grid cols-3">
+    <article class="card"><div class="title"><Icon name="shield" /> What is it?</div><p class="desc" style="margin:0">Kaspersky's essential protection layer: malware blocking, web protection and defense against common threats.</p></article>
+    <article class="card"><div class="title"><Icon name="users" /> Who is it for?</div><p class="desc" style="margin:0">Personal users and households who want reliable, simple protection on one or several devices.</p></article>
+    <article class="card"><div class="title"><Icon name="check" /> Differences</div><p class="desc" style="margin:0">It is the base plan. <a href="/en/kaspersky-plus-panama/">Plus</a> adds privacy and utilities; <a href="/en/kaspersky-premium-panama/">Premium</a> adds the highest tier of features and support.</p></article>
+  </div></div></section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>What does Kaspersky Standard include?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Real-time antivirus and anti-malware</li>
+            <li><Icon name="check" /> Protection against phishing and dangerous websites</li>
+            <li><Icon name="check" /> Firewall and basic network monitoring</li>
+            <li><Icon name="check" /> Low impact on device performance</li>
+            <li><Icon name="check" /> Protection for Windows, macOS, Android and iOS (by plan)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> Who is it ideal for?</div>
+          <p class="desc">Ideal for personal users and households wanting solid, simple protection for one or several devices, without advanced features they will not use.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">Not sure which to choose? Message us and we will advise you with no obligation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

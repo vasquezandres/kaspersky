@@ -1,0 +1,59 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'What does Plus add over Standard?', a: 'Broadly, it adds privacy features and performance utilities on top of essential protection. We detail the scope when quoting.' },
+  { q: 'How many devices is it available for?', a: 'Options for 1, 3, 5 or 10 devices for 1 or 2 years.' },
+  { q: 'Is it good for families?', a: 'Yes, it is a solid multi-device option. For dedicated parental control there is also Safe Kids.' },
+  { q: 'Are the licenses original?', a: 'Yes. Solutech Panamá independently sells original Kaspersky licenses.' },
+  { q: 'Does the Kaspersky Plus VPN have a limit?', a: 'VPN scope depends on the current product edition. We confirm exact details when quoting so you know what your license includes.' },
+  { q: 'Is Plus worth it over Standard?', a: 'If you connect to public networks or handle sensitive data, yes: the added privacy and utilities justify the difference. If you only want antivirus, Standard may be enough.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-plus-panama/"
+  title="Kaspersky Plus Panama | Antivirus with privacy — Solutech"
+  description="Buy Kaspersky Plus in Panama: essential protection plus privacy and performance utilities, multi-device. Quotes and installation with local support from Solutech."
+  h1="Kaspersky Plus in Panama"
+  intro="All the protection of Standard plus privacy features and utilities to keep your devices fast and secure. Made for those who want an extra layer of protection."
+  eyebrow="Home"
+  breadcrumbName="Kaspersky Plus"
+  segment="home"
+  match="Kaspersky Plus (LA)"
+  configHeading="Configure your Kaspersky Plus"
+  faqs={faqs}
+  waText="Hi, I'd like a quote for Kaspersky Plus. I have ___ devices for ___ year(s)."
+  ctaHeading="Protection with privacy included"
+  ctaText="Get a quote for Kaspersky Plus and we'll advise you based on your devices."
+  ctaLabel="Quote on WhatsApp"
+>
+  <section class="section"><div class="container"><div class="grid cols-3">
+    <article class="card"><div class="title"><Icon name="shield" /> What is it?</div><p class="desc" style="margin:0">Essential protection plus privacy layers and performance utilities, in a single multi-device plan.</p></article>
+    <article class="card"><div class="title"><Icon name="users" /> Who is it for?</div><p class="desc" style="margin:0">Users who want to protect their privacy and optimize their devices, beyond antivirus alone.</p></article>
+    <article class="card"><div class="title"><Icon name="check" /> Differences</div><p class="desc" style="margin:0">It sits between <a href="/en/kaspersky-standard-panama/">Standard</a> and <a href="/en/kaspersky-premium-panama/">Premium</a>, the most complete tier.</p></article>
+  </div></div></section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>What does Kaspersky Plus include?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Everything in Kaspersky Standard</li>
+            <li><Icon name="check" /> VPN for more private and secure browsing</li>
+            <li><Icon name="check" /> Privacy and data-protection features</li>
+            <li><Icon name="check" /> Optimization and performance utilities</li>
+            <li><Icon name="check" /> Local support and installation by Solutech</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> Who is it ideal for?</div>
+          <p class="desc">Ideal for those who use online banking, shop online or connect to public Wi-Fi and want an extra layer of privacy on top of antivirus.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">Not sure which to choose? Message us and we will advise you with no obligation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

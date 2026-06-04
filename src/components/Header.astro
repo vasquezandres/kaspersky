@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+import { nav, ui, type Lang, toEn, toEs } from '../data/i18n';
+import Icon from './Icon.astro';
+
+interface Props { lang: Lang; esPath: string; }
+const { lang, esPath } = Astro.props;
+
+const items = nav[lang];
+const t = ui[lang];
+const current = Astro.url.pathname;
+
+// Enlaces del selector de idioma -> página equivalente
+const esHref = lang === 'es' ? esPath : toEs(esPath);
+const enHref = lang === 'es' ? toEn(esPath) : esPath;
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href={lang === 'es' ? '/' : '/en/'} aria-label="Solutech Panamá — inicio">
+      <span class="brand-mark">S</span>
+      <span>Solutech Panamá<small>Licencias Kaspersky</small></span>
+    </a>
+
+    <nav id="nav" class="nav" aria-label={t.menu}>
+      {items.map((item) => (
+        <a
+          href={item.href}
+          aria-current={current === item.href ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label={t.language}>
+        <a href={esHref} aria-current={lang === 'es' ? 'true' : 'false'} hreflang="es-PA">ES</a>
+        <a href={enHref} aria-current={lang === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
+      </div>
+      <a class="btn primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp">
+        <Icon name="whatsapp" /> <span class="wa-text">WhatsApp</span>
+      </a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label={lang === 'es' ? 'Cambiar tema' : 'Toggle theme'}>
+        <Icon name="moon" class="t-moon" /><Icon name="sun" class="t-sun hidden" />
+      </button>
+      <button id="hamburger" class="hamburger" type="button" aria-label={t.menu} aria-expanded="false" aria-controls="nav">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .wa-text { font-size: 0.92rem; }
+  @media (max-width: 1000px) { .wa-text { display: none; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = 'kp-theme';
+    var root = document.documentElement;
+    function apply(t) {
+      root.setAttribute('data-theme', t);
+      var moon = document.querySelector('.t-moon');
+      var sun = document.querySelector('.t-sun');
+      if (moon && sun) {
+        moon.classList.toggle('hidden', t === 'dark');
+        sun.classList.toggle('hidden', t !== 'dark');
+      }
+    }
+    apply(localStorage.getItem(KEY) || 'light');
+    document.getElementById('theme-toggle')?.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      localStorage.setItem(KEY, next);
+      apply(next);
+    });
+    var burger = document.getElementById('hamburger');
+    var nav = document.getElementById('nav');
+    burger?.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  })();
+</script>

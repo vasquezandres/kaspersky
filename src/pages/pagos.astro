@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DisclaimerBanner from '../components/DisclaimerBanner.astro';
+import Icon from '../components/Icon.astro';
+import { site, waLink } from '../data/site';
+const lang = 'es' as const;
+const methods = [
+  { name: 'Yappy', img: '/assets/img/payments/yappy.webp', desc: 'Pago móvil rápido. Te indicamos el directorio Yappy al confirmar tu cotización.' },
+  { name: 'Banco General', img: '/assets/img/payments/bancogeneral.webp', desc: 'Transferencia o ACH a cuenta de Solutech Panamá. Te enviamos los datos al cotizar.' },
+  { name: 'PayPal', img: '/assets/img/payments/paypal.webp', desc: 'Opción internacional. Pueden aplicar comisiones según el medio.' },
+];
+---
+<BaseLayout
+  lang={lang}
+  esPath="/pagos/"
+  title="Métodos de pago | Kaspersky Panamá — Solutech"
+  description="Métodos de pago para tus licencias Kaspersky en Panamá: Yappy, transferencia Banco General y PayPal. Facturación con ITBMS. Envía tu comprobante por WhatsApp."
+>
+  <section class="section tight">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="/">Inicio</a> &nbsp;/&nbsp; <span>Métodos de pago</span></nav>
+      <span class="eyebrow" style="margin-top:18px">Pagos</span>
+      <h1>Métodos de pago</h1>
+      <p class="lead">Aceptamos pagos locales e internacionales. Tras confirmar tu cotización te enviamos los datos exactos para pagar y, una vez pagado, nos compartes el comprobante por WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="section tight"><div class="container"><DisclaimerBanner lang={lang} /></div></section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        {methods.map((m) => (
+          <article class="card hover">
+            <img src={m.img} alt={m.name} width="120" height="48" loading="lazy" style="height:42px;width:auto;object-fit:contain" />
+            <div class="title">{m.name}</div>
+            <p class="desc" style="margin:0">{m.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="grid cols-2 mt-4">
+        <article class="card">
+          <div class="title"><Icon name="receipt" /> Facturación</div>
+          <ul class="list">
+            <li><Icon name="check" /> Emitimos factura fiscal de Panamá con ITBMS cuando aplica.</li>
+            <li><Icon name="check" /> Para empresa, incluye tu RUC y DV al cotizar.</li>
+            <li><Icon name="check" /> Te confirmamos el total final antes de pagar.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="title"><Icon name="whatsapp" /> Enviar comprobante</div>
+          <p class="desc">Una vez realizado el pago, envíanos el comprobante por WhatsApp para procesar y entregar tu licencia.</p>
+          <div class="btn-row mt-2">
+            <a class="btn primary" href={waLink('Hola, adjunto el comprobante de pago de mi licencia Kaspersky.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Enviar comprobante</a>
+          </div>
+          <p class="muted" style="font-size:.82rem;margin:8px 0 0">No solicitamos contraseñas ni claves de banca en línea. Nunca compartas tus credenciales bancarias.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

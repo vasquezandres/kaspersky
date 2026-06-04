@@ -1,0 +1,63 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Para qué tamaño de empresa sirve?', a: 'Para pequeñas empresas y oficinas, desde 5 hasta 99 equipos. Incluye protección de equipos de escritorio, móviles y servidores según el paquete.' },
+  { q: '¿Cómo se cuenta la licencia, por equipos o por nodos?', a: 'Hay dos formas: por paquetes de equipos fijos (5, 10, 15, 20, 25, 50) y por tramos de nodos (5–9, 10–14, …, 50–99). El configurador te muestra ambas según el producto.' },
+  { q: '¿Incluye protección de servidores?', a: 'Sí. La cantidad de servidores incluidos varía según el paquete o tramo; el configurador lo indica.' },
+  { q: '¿Necesito conocimientos técnicos para administrarlo?', a: 'Está pensado para ser sencillo. Además, Solutech Panamá te ayuda con instalación, configuración inicial y soporte.' },
+  { q: '¿Emiten factura con ITBMS para empresa?', a: 'Sí. Incluye RUC y DV al cotizar y emitimos la factura correspondiente.' },
+  { q: '¿Cómo sé cuántas licencias necesito?', a: 'Cuenta cada computadora, laptop, móvil de trabajo y servidor que quieras proteger. En esta página puedes ajustar la cantidad y ver el total estimado; si tienes servidores, te armamos la combinación exacta.' },
+  { q: '¿Puedo empezar con pocas licencias y crecer después?', a: 'Sí. Puedes iniciar con la cantidad actual de equipos y ampliar la cobertura cuando tu empresa crezca.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-small-office-security-panama/"
+  title="Kaspersky Small Office Security Panamá | PYMEs — Solutech"
+  description="Kaspersky Small Office Security en Panamá para pequeñas empresas: protección de equipos, móviles y servidores de 5 a 99 nodos. Cotización, licencias e instalación con soporte local."
+  h1="Kaspersky Small Office Security en Panamá"
+  intro="Seguridad pensada para pequeñas empresas y oficinas: protege computadoras, móviles y servidores sin necesidad de un equipo de TI dedicado. Disponible por paquetes de equipos o por tramos de nodos (5–99)."
+  eyebrow="Small Office / PYMEs"
+  breadcrumbName="Small Office Security"
+  segment="smalloffice"
+  configHeading="Configura tu Small Office Security"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky Small Office Security. Tengo ___ equipos y ___ servidor(es)."
+  ctaHeading="Protege tu pequeña empresa"
+  ctaText="Te ayudamos a dimensionar la licencia según tus equipos y servidores, con instalación y soporte local."
+  ctaLabel="Cotizar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="briefcase" /> ¿Qué es?</div><p class="desc" style="margin:0">Una solución de seguridad para pequeñas empresas: protege estaciones de trabajo, móviles y servidores en un solo producto.</p></article>
+        <article class="card"><div class="title"><Icon name="building" /> ¿Para quién es?</div><p class="desc" style="margin:0">Negocios y oficinas de 5 a 99 equipos que necesitan protección profesional sin complejidad.</p></article>
+        <article class="card"><div class="title"><Icon name="cloud" /> ¿Y si soy más grande?</div><p class="desc" style="margin:0">Para flotas mayores o gestión centralizada en la nube, revisa <a href="/kaspersky-endpoint-security-cloud-panama/">Endpoint Security Cloud</a>.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>¿Qué incluye Small Office Security?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Protección de computadoras (Windows y Mac) y móviles</li>
+            <li><Icon name="check" /> Protección de servidores de archivos</li>
+            <li><Icon name="check" /> Seguridad para pagos y banca en línea de la empresa</li>
+            <li><Icon name="check" /> Cifrado y copia de seguridad de archivos</li>
+            <li><Icon name="check" /> Consola sencilla, sin necesidad de un administrador de TI dedicado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> ¿Para quién es ideal?</div>
+          <p class="desc">Ideal para pequeñas empresas, comercios y oficinas de 5 a 99 equipos que necesitan protección profesional sin la complejidad de una solución corporativa.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">¿Dudas sobre cuál elegir? Escríbenos y te asesoramos sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

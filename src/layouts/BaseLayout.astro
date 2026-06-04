@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
+import LocalBusinessJsonLd from '../components/LocalBusinessJsonLd.astro';
+import { ui, localeTag, type Lang } from '../data/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  esPath: string;          // ruta canónica ES (clave en routePairs)
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+const { title, description, lang, esPath, image, type, noindex } = Astro.props;
+const t = ui[lang];
+---
+<!doctype html>
+<html lang={localeTag[lang]} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Fuente: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    />
+
+    <SEO {title} {description} {lang} {esPath} {image} {type} {noindex} />
+    <WebSiteJsonLd />
+    <LocalBusinessJsonLd />
+    <slot name="jsonld" />
+
+    <!-- Tema antes del paint (evita parpadeo) -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('kp-theme') || 'light';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.skipToContent}</a>
+    <div class="announcement">{lang === 'es'
+      ? 'Proveedor independiente en Panamá · '
+      : 'Independent provider in Panama · '}<b>{lang === 'es' ? 'Licencias originales con soporte local' : 'Original licenses with local support'}</b></div>
+    <Header {lang} {esPath} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer {lang} />
+    <WhatsAppFab {lang} />
+  </body>
+</html>

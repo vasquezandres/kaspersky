@@ -1,0 +1,59 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const tools = [
+  { name: 'AnyDesk', img: '/assets/img/tools/anydesk.webp', desc: 'Rápido y estable, ideal para soporte puntual.' },
+  { name: 'RustDesk', img: '/assets/img/tools/rustdesk.webp', desc: 'Open source, enfocado en privacidad.' },
+  { name: 'HopToDesk', img: '/assets/img/tools/hoptodesk.webp', desc: 'Gratuito y multiplataforma, sin instalación pesada.' },
+];
+const services = [
+  'Instalación y activación de Kaspersky', 'Limpieza de virus y malware', 'Desinstalación de antivirus previos',
+  'Migración entre soluciones de seguridad', 'Configuración básica de protección', 'Revisión básica del rendimiento del equipo',
+  'Soporte para empresas y servidores', 'Asesoría para elegir el plan correcto',
+];
+const faqs = [
+  { q: '¿Cómo es la instalación remota?', a: 'Usamos herramientas como AnyDesk, RustDesk o HopToDesk. <strong>La sesión es temporal y la autorizas tú</strong>: nos das acceso solo durante el soporte y puedes cerrarlo cuando quieras. No almacenamos accesos ni contraseñas.' },
+  { q: '¿Atienden de forma presencial?', a: 'Sí, ofrecemos atención presencial en Ciudad de Panamá y remota en todo el país.' },
+  { q: '¿Me cobran solo por la licencia o también el soporte?', a: 'La venta de licencias y el soporte pueden cotizarse por separado o en conjunto. Te lo indicamos claramente en la cotización.' },
+  { q: '¿Solicitan contraseñas?', a: 'No. Nunca pedimos contraseñas de banca ni datos sensibles. El acceso remoto lo controlas tú durante la sesión.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/soporte-kaspersky-panama/"
+  title="Soporte e instalación Kaspersky en Panamá | Solutech"
+  description="Instalación y soporte técnico de Kaspersky en Panamá: instalación remota o presencial, limpieza de virus, migración y configuración. Soporte local de Solutech Panamá."
+  h1="Soporte e instalación de Kaspersky en Panamá"
+  intro="No solo vendemos licencias: te ayudamos a instalar, activar y dejar tus equipos protegidos. Instalación remota (con tu autorización) o presencial en Ciudad de Panamá."
+  eyebrow="Servicios"
+  breadcrumbName="Soporte e instalación"
+  faqs={faqs}
+  waText="Hola, necesito soporte/instalación de Kaspersky. Detalle: ___."
+  ctaHeading="¿Necesitas ayuda con tu Kaspersky?"
+  ctaText="Escríbenos y coordinamos la instalación o el soporte, de forma remota o presencial."
+  ctaLabel="Solicitar soporte por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <h2>Servicios de soporte</h2>
+      <div class="grid cols-2 mt-3">
+        <article class="card"><ul class="list">{services.map((s) => (<li><Icon name="check" /> {s}</li>))}</ul></article>
+        <article class="card">
+          <div class="title"><Icon name="lock" /> Acceso remoto seguro</div>
+          <p class="desc">El soporte remoto se realiza <strong>solo con tu autorización expresa</strong>. La sesión es temporal, la controlas tú y puedes finalizarla en cualquier momento. No guardamos accesos ni solicitamos contraseñas bancarias.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">Herramientas que utilizamos:</p>
+          <div class="tools-grid">
+            {tools.map((tool) => (
+              <div class="tool">
+                <img src={tool.img} alt={`${tool.name} — herramienta de soporte remoto`} width="46" height="46" loading="lazy" />
+                <span class="tname">{tool.name}</span>
+                <p class="tdesc">{tool.desc}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</ProductLayout>

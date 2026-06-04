@@ -1,0 +1,14 @@
+# Cloudflare Pages — redirecciones 301 desde rutas viejas (.html) a las nuevas
+/index.html              /                                          301
+/hogar.html              /kaspersky-hogar-panama/                   301
+/hogar/                  /kaspersky-hogar-panama/                   301
+/smalloffice.html        /kaspersky-small-office-security-panama/   301
+/smalloffice/            /kaspersky-small-office-security-panama/   301
+/empresas.html           /kaspersky-endpoint-security-cloud-panama/ 301
+/empresas/               /kaspersky-endpoint-security-cloud-panama/ 301
+/servicios.html          /soporte-kaspersky-panama/                 301
+/servicios/              /soporte-kaspersky-panama/                 301
+/pagos.html              /pagos/                                    301
+/cotizar.html            /cotizar/                                  301
+/cotizacion.html         /cotizar/                                  301
+/gracias.html            /gracias/                                  301

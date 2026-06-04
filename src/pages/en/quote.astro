@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DisclaimerBanner from '../../components/DisclaimerBanner.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+const lang = 'en' as const;
+---
+<BaseLayout lang={lang} esPath="/cotizar/"
+  title="Your quote | Kaspersky Panama — Solutech"
+  description="Review your Kaspersky license quote summary and send it to us on WhatsApp or by email. Local support from Solutech Panamá."
+  noindex={true}>
+  <section class="section tight"><div class="container">
+    <nav class="breadcrumb" aria-label="breadcrumb"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Quote</span></nav>
+    <span class="eyebrow" style="margin-top:18px">Quote</span>
+    <h1>Your quote summary</h1>
+    <p class="lead">Review the details and send us the request. We confirm availability, total with ITBMS (if applicable) and payment methods.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <article class="card plan-card" style="max-width:560px">
+      <div class="title" id="q-name">Kaspersky product</div>
+      <div class="desc" id="q-desc">—</div>
+      <div class="price"><span id="q-price" data-state="consult">Ask us</span> <small id="q-itbms"></small></div>
+    </article>
+    <h2 class="mt-4">Your details</h2>
+    <form id="q-form" class="form" action={`https://formspree.io/f/${site.formspreeId}`} method="POST">
+      <div class="field"><label for="q-cname">Full name</label><input id="q-cname" class="input" name="name" required /></div>
+      <div class="field"><label for="q-cemail">Email</label><input id="q-cemail" class="input" type="email" name="email" required /></div>
+      <div class="field"><label for="q-ccompany">Company / Tax ID (optional)</label><input id="q-ccompany" class="input" name="company" /></div>
+      <div class="field"><label for="q-cextra">Comments</label><textarea id="q-cextra" class="textarea" name="extra" placeholder="Payment method, required date, etc."></textarea></div>
+      <input type="hidden" name="_subject" value="Kaspersky quote — Solutech Panamá" />
+      <input type="hidden" name="product" id="q-h-producto" />
+      <input type="hidden" name="details" id="q-h-detalle" />
+      <input type="hidden" name="price" id="q-h-precio" />
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+      <div class="btn-row">
+        <button class="btn primary" type="submit"><Icon name="send" /> Send quote</button>
+        <a id="q-wa" class="btn wa" target="_blank" rel="noopener"><Icon name="whatsapp" /> Send on WhatsApp</a>
+      </div>
+      <p class="muted" style="font-size:.82rem">You can also email us at <a href={`mailto:${site.email}`}>{site.email}</a>. We never ask for passwords or banking details.</p>
+    </form>
+    <div class="mt-4"><DisclaimerBanner lang={lang} /></div>
+  </div></section>
+
+  <script type="module" define:vars={{ SHEET_ID: site.sheetId, DEFAULT_SHEET: site.defaultSheet, WA: site.whatsapp }}>
+    function getParams() { const u = new URL(location.href); const o = {}; u.searchParams.forEach((v, k) => (o[k] = v)); return o; }
+    function fmt(n) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(+n || 0); }
+    function activeSheet() {
+      const q = new URL(location.href).searchParams.get('sheet');
+      if (q) { try { localStorage.setItem('kp-sheet', q); } catch (e) {} return q; }
+      try { return localStorage.getItem('kp-sheet') || DEFAULT_SHEET; } catch (e) { return DEFAULT_SHEET; }
+    }
+    async function priceBySKU(sku) {
+      if (!sku) return 0;
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(activeSheet())}`;
+        const raw = await fetch(url).then((r) => r.text());
+        const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+        const cols = json.table.cols.map((c) => c.label);
+        const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
+        const list = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
+        const row = list.find((r) => String(r.SKU || '').trim() === String(sku).trim());
+        return row ? +String(row.PrecioUSD || '0').replace(/[^0-9.]/g, '') : 0;
+      } catch (e) { return 0; }
+    }
+    const p = getParams();
+    const name = p.product || 'Kaspersky product';
+    const details = [
+      p.devices ? `${p.devices} device(s)` : '',
+      p.nodes ? `${p.nodes} nodes (range ${p.range || ''})` : '',
+      p.pack ? `Pack ${p.pack} devices` : '',
+      p.years ? `${p.years} year(s)` : '',
+      p.sku ? `SKU ${p.sku}` : '',
+    ].filter(Boolean).join(' • ') || '—';
+    document.getElementById('q-name').textContent = name;
+    document.getElementById('q-desc').textContent = details;
+    const price = await priceBySKU(p.sku);
+    const totalParam = p.total ? +p.total : 0;
+    const shown = totalParam > 0 ? totalParam : price;
+    const priceTxt = shown > 0 ? fmt(shown) : 'Ask us';
+    const priceEl = document.getElementById('q-price');
+    priceEl.textContent = priceTxt;
+    if (shown > 0) { priceEl.removeAttribute('data-state'); document.getElementById('q-itbms').textContent = (p.unit ? `${fmt(+p.unit)}/device × ${p.nodes} · ` : '') + '+ tax if applicable'; }
+    document.getElementById('q-h-producto').value = name;
+    document.getElementById('q-h-detalle').value = details;
+    document.getElementById('q-h-precio').value = priceTxt;
+    const waTxt = `Hi, I'd like this Kaspersky quote:%0A%0A${encodeURIComponent(name)}%0A${encodeURIComponent(details)}%0APrice: ${encodeURIComponent(priceTxt)} (tax as applicable)`;
+    document.getElementById('q-wa').href = `https://wa.me/${WA}?text=${waTxt}`;
+    const form = document.getElementById('q-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type=submit]');
+      if (btn) btn.disabled = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+        if (res.ok) { location.href = '/en/thank-you/'; }
+        else { alert('We could not send the quote. Please contact us on WhatsApp.'); if (btn) btn.disabled = false; }
+      } catch (err) { alert('Network error. Please try again or contact us on WhatsApp.'); if (btn) btn.disabled = false; }
+    });
+  </script>
+</BaseLayout>

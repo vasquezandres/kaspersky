@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+const lang = 'en' as const;
+const updated = '2026';
+---
+<BaseLayout lang={lang} esPath="/aviso-legal/"
+  title="Legal notice | Solutech Panamá — Kaspersky licenses"
+  description="Legal notice of Solutech Panamá, independent provider of Kaspersky licenses in Panama. Information about trademarks, independence and terms of use.">
+  <section class="section"><div class="container prose">
+    <nav class="breadcrumb" aria-label="breadcrumb"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Legal notice</span></nav>
+    <h1>Legal notice</h1>
+    <p class="muted">Last updated: {updated}</p>
+
+    <h2>1. Identification</h2>
+    <p>This website (<strong>kasperskypanama.com</strong>) is operated by <strong>Solutech Panamá</strong>, a technology services and support company based in Panama City, Republic of Panama. Contact: <a href={`mailto:${site.email}`}>{site.email}</a> · WhatsApp {site.whatsappDisplay}.</p>
+
+    <h2>2. Independent status — not an official site</h2>
+    <p>Solutech Panamá is an <strong>independent provider and reseller</strong> of security software solutions, including Kaspersky-branded licenses. <strong>This site is not the official Kaspersky website</strong>, does not belong to AO Kaspersky Lab or its affiliates, and does <strong>not officially represent</strong> that company.</p>
+    <p>The use of the term "Kaspersky" on this site and in the domain name is strictly <strong>descriptive and referential</strong>, to indicate the products we sell and support. It does not imply affiliation, sponsorship, official authorization or representation.</p>
+
+    <h2>3. Trademarks</h2>
+    <p>"Kaspersky" and the associated logos, product names and distinctive signs are <strong>trademarks of their respective owners</strong> (AO Kaspersky Lab and/or its holders). All other trademarks mentioned belong to their respective owners. Their mention does not constitute a claim of ownership by Solutech Panamá.</p>
+
+    <h2>4. Products, prices and availability</h2>
+    <p>The products shown correspond to original licenses. Listed prices are <strong>reference values in US dollars (USD)</strong> and may vary due to availability, promotions, provider changes and application of the ITBMS tax where applicable. The final price is confirmed in the quote.</p>
+
+    <h2>5. Support services</h2>
+    <p>Installation and remote support services are provided <strong>only with the express authorization of the customer</strong>, using remote-access tools controlled by the user during the session. Solutech Panamá does not store access and does not request online-banking passwords or sensitive data.</p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>The information on this site is offered in good faith and for informational purposes. Solutech Panamá does not guarantee that the content is free of errors or omissions and will not be liable for damages arising from use of the site. Links to third-party sites are offered for convenience and do not imply endorsement.</p>
+
+    <h2>7. Site ownership</h2>
+    <p>The design, text and other proprietary content of this site belong to Solutech Panamá, except for the third-party trademarks and materials indicated. Reproduction without authorization is not permitted.</p>
+
+    <h2>8. Applicable law</h2>
+    <p>This legal notice is governed by the laws of the Republic of Panama. For any inquiries, write to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+    <p class="mt-3"><a href="/en/privacy-policy/">See privacy policy →</a></p>
+  </div></section>
+</BaseLayout>

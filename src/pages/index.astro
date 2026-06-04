@@ -1,0 +1,321 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import DisclaimerBanner from '../components/DisclaimerBanner.astro';
+import TrustSection from '../components/TrustSection.astro';
+import FAQ from '../components/FAQ.astro';
+import FaqJsonLd from '../components/FaqJsonLd.astro';
+import Icon from '../components/Icon.astro';
+import { site, waLink } from '../data/site';
+import { ui } from '../data/i18n';
+
+const lang = 'es' as const;
+const t = ui[lang];
+
+const faqs = [
+  { q: '¿Son el sitio oficial de Kaspersky?', a: 'No. Solutech Panamá es un <strong>proveedor/revendedor independiente</strong>. Este sitio no es el sitio oficial de Kaspersky ni representa directamente a AO Kaspersky Lab.' },
+  { q: '¿Las licencias son originales?', a: 'Sí, comercializamos <strong>licencias originales</strong> de Kaspersky y te asesoramos para elegir el plan correcto.' },
+  { q: '¿Puedo renovar una licencia Kaspersky existente?', a: 'Sí. Gestionamos renovaciones; solo necesitamos saber tu producto actual, número de dispositivos y fecha de vencimiento.' },
+  { q: '¿Me ayudan a instalar el antivirus?', a: 'Sí. Ofrecemos instalación remota (con tu autorización) o presencial en Ciudad de Panamá, además de limpieza de antivirus previos.' },
+  { q: '¿Puedo comprar para varios equipos?', a: 'Sí: desde 1 dispositivo para hogar hasta packs y rangos para pequeñas empresas (5–99) y soluciones en la nube para corporativo.' },
+  { q: '¿Sirve para empresas?', a: 'Sí. Para empresas recomendamos Kaspersky Small Office Security o Kaspersky Endpoint Security Cloud según el número de equipos y servidores.' },
+  { q: '¿Qué diferencia hay entre Standard, Plus y Premium?', a: 'A grandes rasgos: Standard es protección esencial; Plus añade privacidad y utilidades; Premium suma el nivel más alto de funciones y soporte. Te ayudamos a elegir según tu caso.' },
+  { q: '¿Aceptan transferencia, Yappy o pagos locales?', a: 'Sí. Aceptamos Yappy, transferencia a Banco General y PayPal. Más detalles en la página de <a href="/pagos/">métodos de pago</a>.' },
+  { q: '¿Pueden instalarlo de forma remota?', a: 'Sí, con herramientas como AnyDesk, RustDesk o HopToDesk. La sesión es temporal, la autorizas tú y puedes cerrarla cuando quieras. No guardamos accesos.' },
+  { q: '¿Los precios incluyen impuestos?', a: 'Los precios mostrados son referenciales en USD; el ITBMS se aplica cuando corresponde. Te confirmamos el total final en la cotización.' },
+  { q: '¿Cuánto tarda la entrega de la licencia?', a: 'Normalmente el mismo día, una vez confirmado el pago.' },
+  { q: '¿Dónde puedo comprar Kaspersky en Panamá?', a: 'Con Solutech Panamá, de forma 100% local: cotizas por este sitio o por WhatsApp, pagas con Yappy, Banco General o PayPal, y recibes tu licencia original con soporte en español. No necesitas tarjetas internacionales ni comprar en sitios del extranjero.' },
+  { q: '¿Kaspersky es seguro y confiable?', a: 'Kaspersky es uno de los antivirus mejor evaluados en pruebas independientes de laboratorios como AV-TEST y AV-Comparatives, con altos índices de detección y bajo impacto en el rendimiento. Nosotros comercializamos licencias originales del fabricante.' },
+  { q: '¿Funciona en Mac y en celulares?', a: 'Sí. Según el plan, Kaspersky protege Windows, macOS, Android e iOS. También existen productos específicos para móviles. Te confirmamos la compatibilidad exacta al cotizar.' },
+  { q: '¿Qué pasa cuando vence mi licencia?', a: 'Tu equipo deja de recibir actualizaciones de protección, quedando expuesto a nuevas amenazas. Por eso conviene renovar antes del vencimiento; te avisamos y gestionamos la <a href="/renovar-kaspersky-panama/">renovación</a> rápido.' },
+  { q: '¿Emiten factura con ITBMS para mi empresa?', a: 'Sí. Emitimos factura fiscal panameña con ITBMS cuando corresponde. Solo incluye tu RUC y DV al cotizar.' },
+  { q: '¿Cómo calculo el precio para mi empresa por cantidad de equipos?', a: 'En las páginas de <a href="/kaspersky-small-office-security-panama/">Small Office Security</a> y <a href="/kaspersky-endpoint-security-cloud-panama/">Endpoint Security Cloud</a> puedes ajustar la cantidad de nodos y ver el total estimado al instante. Para escenarios mixtos (equipos + servidores) te armamos una cotización a medida.' },
+];
+
+const which = [
+  { icon: 'home', t: 'Para 1 computadora personal', d: 'Kaspersky Standard o Plus para 1 dispositivo.' },
+  { icon: 'users', t: 'Para varios dispositivos', d: 'Planes de 3, 5 o 10 dispositivos en Standard, Plus o Premium.' },
+  { icon: 'shield', t: 'Para familia', d: 'Premium multi-dispositivo o Safe Kids para control parental.' },
+  { icon: 'briefcase', t: 'Para pequeña empresa', d: 'Kaspersky Small Office Security por equipos o por nodos.' },
+  { icon: 'building', t: 'Para oficina con varios equipos', d: 'Small Office Security (hasta 99) o Endpoint Security Cloud.' },
+  { icon: 'refresh', t: 'Para renovar una licencia', d: 'Gestionamos la renovación de tu licencia actual.' },
+];
+
+const support = [
+  'Venta de licencias originales', 'Renovación de licencias', 'Instalación remota (con autorización)',
+  'Instalación presencial en Ciudad de Panamá', 'Limpieza de virus y antivirus previos',
+  'Revisión básica del equipo', 'Configuración básica de protección',
+  'Soporte para empresas', 'Asesoría para escoger el plan correcto',
+];
+---
+<BaseLayout
+  lang={lang}
+  esPath="/"
+  title="Licencias Kaspersky en Panamá | Cotiza y renueva con Solutech"
+  description="Solutech Panamá: proveedor independiente de licencias Kaspersky. Cotiza, renueva e instala tu antivirus con soporte técnico local en Panamá. Cotización rápida por WhatsApp."
+>
+  <FaqJsonLd slot="jsonld" items={faqs.map((f) => ({ q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))} />
+
+  <Hero
+    lang={lang}
+    eyebrow="Panamá · Hogar · Small Office · Empresas"
+    title={'Licencias Kaspersky <span style="color:var(--brand)">en Panamá</span>'}
+    subtitle="Cotiza, renueva e instala tu antivirus Kaspersky con soporte técnico local de Solutech Panamá."
+    primaryHref={waLink('Hola, quiero cotizar una licencia Kaspersky. Tengo ___ equipos y necesito saber cuál plan me conviene.')}
+    primaryLabel={t.quoteWhatsApp}
+    secondaryHref="#planes"
+    secondaryLabel={t.viewPlans}
+    split={true}
+    metrics={[
+      { n: '12+', t: 'años en Panamá' },
+      { n: 'Local', t: 'remoto y presencial' },
+      { n: 'ITBMS', t: 'factura para empresas' },
+    ]}
+  >
+    <div slot="visual">
+      <div class="lic-bg"></div>
+      <article class="lic">
+        <div class="lic-top">
+          <h3>{site.featured.name}</h3>
+          <span class="lic-badge">Más elegido</span>
+        </div>
+        <div class="lic-price" id="hero-price" data-state="consult" data-sku={site.featured.sku}>
+          <span id="hero-price-val">Consultar</span> <small id="hero-price-note"></small>
+        </div>
+        <ul>
+          <li><Icon name="check" /> Antivirus y protección en tiempo real</li>
+          <li><Icon name="check" /> Privacidad y utilidades de rendimiento</li>
+          <li><Icon name="check" /> Instalación y soporte local incluido</li>
+          <li><Icon name="check" /> Licencia original · entrega el mismo día</li>
+        </ul>
+        <a class="btn teal full" href="/kaspersky-plus-panama/">Ver Kaspersky Plus</a>
+      </article>
+    </div>
+  </Hero>
+
+  <!-- FRANJA DE CONFIANZA -->
+  <div class="strip">
+    <div class="container strip-row">
+      <span class="item"><Icon name="card" /> Aceptamos <b>Yappy</b>, <b>Banco General</b> y <b>PayPal</b></span>
+      <span class="item"><Icon name="receipt" /> Facturación fiscal con <b>ITBMS</b> · RUC y DV</span>
+      <span class="item"><Icon name="map" /> Soporte <b>remoto y presencial</b> en Panamá</span>
+    </div>
+  </div>
+
+  <section class="section tight">
+    <div class="container">
+      <DisclaimerBanner lang={lang} />
+    </div>
+  </section>
+
+  <!-- INTRO / CONTENIDO SEO -->
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-2" style="align-items:center;gap:40px">
+        <div>
+          <span class="eyebrow">Antivirus Kaspersky en Panamá</span>
+          <h2>Protección de primer nivel, con quien te responde de verdad.</h2>
+          <p class="lead" style="margin-bottom:14px">Kaspersky es una de las marcas de ciberseguridad más reconocidas del mundo, con motores de detección premiados de forma independiente año tras año. Pero una licencia sin soporte local no sirve de mucho cuando algo falla.</p>
+          <p class="muted">En <strong>Solutech Panamá</strong> combinamos licencias originales con soporte técnico real en Panamá: te ayudamos a elegir el plan correcto, lo instalamos (de forma remota o presencial) y quedamos disponibles para cualquier duda. Atendemos hogares, profesionales independientes y empresas, con factura fiscal e ITBMS cuando corresponde.</p>
+        </div>
+        <div class="grid" style="gap:14px">
+          <article class="card"><div class="title"><Icon name="shield" /> Detección líder</div><p class="desc" style="margin:0">Protección contra virus, ransomware, phishing y amenazas de día cero, con bajo impacto en el rendimiento de tus equipos.</p></article>
+          <article class="card"><div class="title"><Icon name="map" /> Soporte que sí contesta</div><p class="desc" style="margin:0">Personas reales en Panamá por WhatsApp, en español, para instalación, activación y resolución de problemas.</p></article>
+          <article class="card"><div class="title"><Icon name="receipt" /> Compra formal</div><p class="desc" style="margin:0">Licencias originales con entrega el mismo día y facturación fiscal panameña para personas y empresas.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="sectit">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>De la cotización a la protección en 3 pasos</h2>
+        <p>Sin trámites complicados. Te acompañamos en todo el proceso.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="send" /> 1. Cotiza</div><p class="desc" style="margin:0">Elige tu plan aquí o escríbenos por WhatsApp con la cantidad de equipos. Te confirmamos el total con ITBMS.</p></article>
+        <article class="card"><div class="title"><Icon name="card" /> 2. Paga</div><p class="desc" style="margin:0">Yappy, transferencia a Banco General o PayPal. Nos envías el comprobante y procesamos tu licencia.</p></article>
+        <article class="card"><div class="title"><Icon name="check" /> 3. Protégete</div><p class="desc" style="margin:0">Recibes tu licencia original el mismo día y, si lo necesitas, te ayudamos a instalarla y activarla.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES / CONFIGURADOR -->
+  <section id="planes" class="section">
+    <div class="container">
+      <div class="sectit">
+        <span class="eyebrow">Planes para hogar</span>
+        <h2>Elige tu plan Kaspersky</h2>
+        <p>Ajusta dispositivos y años para ver el precio. Si no está disponible, verás “Consultar” y te cotizamos al instante.</p>
+      </div>
+
+      <div
+        class="grid cols-3"
+        data-pricing
+        data-segment="home"
+        data-lang="es"
+        data-only="Kaspersky Standard (LA),Kaspersky Plus (LA),Kaspersky Premium (LA)"
+        data-sheet-id={site.sheetId}
+        data-sheet={site.defaultSheet}
+        data-quote="/cotizar/"
+      >
+        <p class="muted">Cargando planes…</p>
+      </div>
+
+      <p class="muted mt-3" style="font-size:.86rem">{t.priceNote}</p>
+
+      <div class="mt-4" style="margin-top:36px">
+        <div class="grid cols-2">
+          <article class="card hover">
+            <div class="title"><Icon name="briefcase" /> Kaspersky Small Office Security</div>
+            <p class="desc">Para pequeñas empresas y oficinas (5–99 equipos): protege computadoras, móviles y servidores. Calcula el total por cantidad de equipos.</p>
+            <div class="btn-row mt-2"><a class="btn teal" href="/kaspersky-small-office-security-panama/">Ver Small Office <Icon name="briefcase" /></a></div>
+          </article>
+          <article class="card hover">
+            <div class="title"><Icon name="home" /> ¿Buscas más productos para el hogar?</div>
+            <p class="desc">Safe Kids (control parental), Password Manager, VPN y protección para celulares, además de Standard, Plus y Premium.</p>
+            <div class="btn-row mt-2"><a class="btn" href="/kaspersky-hogar-panama/">Ver todas las opciones de hogar →</a></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="btn-row mt-4">
+        <a class="btn" href="/kaspersky-endpoint-security-cloud-panama/"><Icon name="cloud" /> Endpoint Security Cloud (empresas)</a>
+        <a class="btn" href="/renovar-kaspersky-panama/"><Icon name="refresh" /> Renovar licencia</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿CUÁL LICENCIA NECESITO? -->
+  <section class="section bg-alt">
+    <div class="container">
+      <h2 class="center">¿Cuál licencia necesito?</h2>
+      <div class="grid cols-3 mt-4">
+        {which.map((w) => (
+          <article class="card hover">
+            <div class="title"><Icon name={w.icon} /> {w.t}</div>
+            <p class="desc" style="margin:0">{w.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SOPORTE -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Servicios</span>
+      <h2>Instalación y soporte técnico local</h2>
+      <div class="grid cols-2 mt-4">
+        <article class="card">
+          <ul class="list">
+            {support.map((s) => (<li><Icon name="check" /> {s}</li>))}
+          </ul>
+        </article>
+        <article class="card">
+          <div class="title"><Icon name="tools" /> ¿Cómo trabajamos?</div>
+          <p class="desc">La instalación remota se realiza solo con tu autorización expresa, mediante herramientas como AnyDesk, RustDesk o HopToDesk. La sesión es temporal, la controlas tú y no guardamos accesos.</p>
+          <div class="btn-row mt-2">
+            <a class="btn primary" href="/soporte-kaspersky-panama/"><Icon name="tools" /> Ver servicios de soporte</a>
+            <a class="btn wa" href={waLink('Hola, necesito soporte para instalar/activar Kaspersky.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <TrustSection lang={lang} />
+
+  <FAQ heading="Preguntas frecuentes" items={faqs} />
+
+  <!-- CTA FINAL + CONTACTO -->
+  <section id="contacto" class="section bg-alt">
+    <div class="container">
+      <h2 class="center">¿No sabes cuál licencia necesitas?</h2>
+      <p class="lead center" style="margin:0 auto 28px">Escríbenos y te ayudamos a elegir la opción correcta para tu hogar o empresa.</p>
+
+      <div class="grid cols-2">
+        <article class="card">
+          <div class="title"><Icon name="send" /> Escríbenos</div>
+          <form id="contact-form" class="form" action={`https://formspree.io/f/${site.formspreeId}`} method="POST">
+            <div class="field"><label for="c-name">Nombre y apellido</label><input id="c-name" class="input" type="text" name="name" required /></div>
+            <div class="field"><label for="c-email">Correo</label><input id="c-email" class="input" type="email" name="email" required /></div>
+            <div class="field"><label for="c-company">Empresa (opcional)</label><input id="c-company" class="input" type="text" name="company" /></div>
+            <div class="field"><label for="c-msg">¿Qué necesitas?</label><textarea id="c-msg" class="textarea" name="message" placeholder="Licencia, número de equipos/años, RUC si es empresa…" required></textarea></div>
+            <input type="hidden" name="_subject" value="Consulta Kaspersky — Solutech Panamá" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <div class="btn-row">
+              <button class="btn primary" type="submit"><Icon name="send" /> Enviar</button>
+              <a class="btn wa" target="_blank" rel="noopener" href={waLink('Hola, necesito licencias Kaspersky.')}><Icon name="whatsapp" /> WhatsApp</a>
+            </div>
+            <p class="muted" style="font-size:.82rem">No solicitamos contraseñas ni datos bancarios. Al enviar aceptas ser contactado por correo o WhatsApp para tu cotización. Ver <a href="/politica-de-privacidad/">política de privacidad</a>.</p>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="title"><Icon name="phone" /> Contacto directo</div>
+          <ul class="list">
+            <li><Icon name="whatsapp" /> <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
+            <li><Icon name="phone" /> {site.phoneAlt}</li>
+            <li><Icon name="mail" /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><Icon name="clock" /> {site.hours.weekdays} · {site.hours.saturday}</li>
+            <li><Icon name="map" /> Remoto en todo Panamá · presencial en Ciudad de Panamá</li>
+            <li><Icon name="receipt" /> Facturación fiscal con ITBMS (incluye RUC y DV para empresas)</li>
+          </ul>
+          <div class="btn-row mt-2">
+            <a class="btn primary" href={waLink('Hola, necesito licencias Kaspersky.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Chatear ahora</a>
+            <a class="btn" href={`tel:${site.phoneAltTel}`}><Icon name="phone" /> Llamar</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="/scripts/pricing.js"></script>
+  <script type="module" define:vars={{ SHEET_ID: site.sheetId, DEFAULT_SHEET: site.defaultSheet }}>
+    // Precio en vivo de la tarjeta destacada del hero
+    (async () => {
+      const box = document.getElementById('hero-price');
+      if (!box) return;
+      const sku = box.dataset.sku;
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(DEFAULT_SHEET)}`;
+        const raw = await fetch(url).then((r) => r.text());
+        const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+        const cols = json.table.cols.map((c) => c.label);
+        const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
+        const list = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
+        const row = list.find((r) => String(r.SKU || '').trim() === sku);
+        const price = row ? +String(row.PrecioUSD || '0').replace(/[^0-9.]/g, '') : 0;
+        if (price > 0) {
+          document.getElementById('hero-price-val').textContent = new Intl.NumberFormat('es-PA', { style: 'currency', currency: 'USD' }).format(price);
+          document.getElementById('hero-price-note').textContent = '/ año · 3 dispositivos';
+          box.removeAttribute('data-state');
+        } else {
+          document.getElementById('hero-price-val').textContent = 'Ver precio';
+        }
+      } catch (e) {
+        document.getElementById('hero-price-val').textContent = 'Ver precio';
+      }
+    })();
+  </script>
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type=submit]');
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+          if (res.ok) { location.href = '/gracias/'; }
+          else { alert('No pudimos enviar el formulario. Escríbenos por WhatsApp.'); if (btn) btn.disabled = false; }
+        } catch (err) { alert('Error de red. Intenta de nuevo o escríbenos por WhatsApp.'); if (btn) btn.disabled = false; }
+      });
+    })();
+  </script>
+</BaseLayout>

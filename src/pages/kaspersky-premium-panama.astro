@@ -1,0 +1,63 @@
+---
+import ProductLayout from '../layouts/ProductLayout.astro';
+import Icon from '../components/Icon.astro';
+const lang = 'es' as const;
+const faqs = [
+  { q: '¿Qué hace diferente a Premium?', a: 'Es el plan más completo para hogar: incluye lo de Standard y Plus, con el nivel más alto de funciones y soporte prioritario. Te explicamos el alcance al cotizar.' },
+  { q: '¿Cuántos dispositivos cubre?', a: 'Opciones de 1, 3, 5, 10 y hasta 20 dispositivos por 1 o 2 años.' },
+  { q: '¿Es buena opción para una familia grande?', a: 'Sí, especialmente las opciones de 10 o 20 dispositivos.' },
+  { q: '¿Incluye soporte?', a: 'Premium incluye soporte prioritario del fabricante; además tienes el soporte local de Solutech Panamá.' },
+  { q: '¿Cuántos dispositivos puedo proteger con Premium?', a: 'Hay opciones desde 1 hasta 20 dispositivos, perfecto para familias o personas con varios equipos y móviles.' },
+  { q: '¿Premium incluye control parental?', a: 'Las funciones de protección familiar dependen de la edición; en muchos casos se complementa con Kaspersky Safe Kids. Te asesoramos según tu necesidad.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-premium-panama/"
+  title="Kaspersky Premium Panamá | Cotización e instalación — Solutech"
+  description="Compra Kaspersky Premium en Panamá: el plan más completo para hogar, multi-dispositivo, con soporte prioritario. Cotización e instalación con soporte local de Solutech."
+  h1="Kaspersky Premium en Panamá"
+  intro="El nivel máximo de protección para el hogar: todo lo de Standard y Plus, con funciones avanzadas y soporte prioritario. Disponible hasta para 20 dispositivos."
+  eyebrow="Hogar"
+  breadcrumbName="Kaspersky Premium"
+  segment="home"
+  match="Kaspersky Premium (LA)"
+  configHeading="Configura tu Kaspersky Premium"
+  faqs={faqs}
+  waText="Hola, quiero cotizar Kaspersky Premium. Tengo ___ dispositivos por ___ año(s)."
+  ctaHeading="El plan más completo para tu hogar"
+  ctaText="Cotiza Kaspersky Premium con soporte local en Panamá."
+  ctaLabel="Cotizar por WhatsApp"
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3">
+        <article class="card"><div class="title"><Icon name="shield" /> ¿Qué es?</div><p class="desc" style="margin:0">El plan tope de gama para hogar, con el conjunto más amplio de funciones de seguridad, privacidad y soporte.</p></article>
+        <article class="card"><div class="title"><Icon name="users" /> ¿Para quién es?</div><p class="desc" style="margin:0">Familias y usuarios exigentes que quieren la cobertura más completa en varios dispositivos.</p></article>
+        <article class="card"><div class="title"><Icon name="check" /> Diferencias</div><p class="desc" style="margin:0">Supera a <a href="/kaspersky-standard-panama/">Standard</a> y <a href="/kaspersky-plus-panama/">Plus</a> en funciones y soporte, con opciones de mayor cantidad de dispositivos.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>¿Qué incluye Kaspersky Premium?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Todo lo de Standard y Plus</li>
+            <li><Icon name="check" /> El nivel más alto de funciones de seguridad y privacidad</li>
+            <li><Icon name="check" /> Soporte prioritario del fabricante</li>
+            <li><Icon name="check" /> Funciones de protección de identidad</li>
+            <li><Icon name="check" /> Hasta 20 dispositivos en un solo plan</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> ¿Para quién es ideal?</div>
+          <p class="desc">Ideal para familias y usuarios exigentes que quieren la cobertura más completa, con la mayor cantidad de dispositivos y soporte de primer nivel.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">¿Dudas sobre cuál elegir? Escríbenos y te asesoramos sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>

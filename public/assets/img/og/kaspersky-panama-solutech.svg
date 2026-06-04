@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#fbfbfa"/>
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#e6e6e3" stroke-width="2"/>
+  <g transform="translate(80,84)">
+    <rect width="76" height="76" rx="16" fill="#0f766e"/>
+    <text x="38" y="51" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#ffffff">S</text>
+    <text x="98" y="33" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#18181b">Solutech Panamá</text>
+    <text x="98" y="62" font-family="monospace" font-size="16" fill="#5f6066" letter-spacing="2">PROVEEDOR INDEPENDIENTE</text>
+  </g>
+  <text x="80" y="320" font-family="Arial, sans-serif" font-size="74" font-weight="700" fill="#18181b">Licencias Kaspersky</text>
+  <text x="80" y="404" font-family="Arial, sans-serif" font-size="74" font-weight="700" fill="#0f766e">en Panamá</text>
+  <text x="80" y="470" font-family="monospace" font-size="25" fill="#5f6066">cotiza · renueva · instala — soporte local</text>
+  <g transform="translate(80,516)">
+    <rect width="300" height="56" rx="11" fill="#0f766e"/>
+    <text x="150" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">WhatsApp +507 6888-6778</text>
+  </g>
+</svg>

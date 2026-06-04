@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DisclaimerBanner from '../../components/DisclaimerBanner.astro';
+import Icon from '../../components/Icon.astro';
+import { waLink, site } from '../../data/site';
+const lang = 'en' as const;
+const methods = [
+  { name: 'Yappy', img: '/assets/img/payments/yappy.webp', desc: 'Fast local mobile payment. We share the Yappy directory when confirming your quote.' },
+  { name: 'Banco General', img: '/assets/img/payments/bancogeneral.webp', desc: 'Transfer or ACH to a Solutech Panamá account. We send the details when quoting.' },
+  { name: 'PayPal', img: '/assets/img/payments/paypal.webp', desc: 'International option. Fees may apply depending on the method.' },
+];
+---
+<BaseLayout lang={lang} esPath="/pagos/"
+  title="Payment methods | Kaspersky Panama — Solutech"
+  description="Payment methods for your Kaspersky licenses in Panama: Yappy, Banco General transfer and PayPal. Invoicing with ITBMS. Send your receipt on WhatsApp.">
+  <section class="section tight"><div class="container">
+    <nav class="breadcrumb" aria-label="breadcrumb"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Payment methods</span></nav>
+    <span class="eyebrow" style="margin-top:18px">Payments</span>
+    <h1>Payment methods</h1>
+    <p class="lead">We accept local and international payments. After confirming your quote we send the exact payment details and, once paid, you share the receipt with us on WhatsApp.</p>
+  </div></section>
+  <section class="section tight"><div class="container"><DisclaimerBanner lang={lang} /></div></section>
+  <section class="section"><div class="container">
+    <div class="grid cols-3">
+      {methods.map((m) => (
+        <article class="card hover">
+          <img src={m.img} alt={m.name} width="120" height="48" loading="lazy" style="height:42px;width:auto;object-fit:contain" />
+          <div class="title">{m.name}</div><p class="desc" style="margin:0">{m.desc}</p>
+        </article>
+      ))}
+    </div>
+    <div class="grid cols-2 mt-4">
+      <article class="card">
+        <div class="title"><Icon name="receipt" /> Invoicing</div>
+        <ul class="list">
+          <li><Icon name="check" /> We issue Panama tax invoices with ITBMS where applicable.</li>
+          <li><Icon name="check" /> For businesses, include your tax ID details when quoting.</li>
+          <li><Icon name="check" /> We confirm the final total before payment.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="title"><Icon name="whatsapp" /> Send receipt</div>
+        <p class="desc">Once paid, send us the receipt on WhatsApp so we can process and deliver your license.</p>
+        <div class="btn-row mt-2"><a class="btn primary" href={waLink('Hi, attached is my payment receipt for my Kaspersky license.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Send receipt</a></div>
+        <p class="muted" style="font-size:.82rem;margin:8px 0 0">We never ask for online-banking passwords. Never share your banking credentials.</p>
+      </article>
+    </div>
+  </div></section>
+</BaseLayout>

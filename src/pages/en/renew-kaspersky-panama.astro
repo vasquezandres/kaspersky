@@ -1,0 +1,40 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'Can I renew even if my license already expired?', a: 'Yes. We can renew or issue a new license even if the previous one has expired.' },
+  { q: 'Do I need to buy the same plan?', a: 'Not necessarily. We can keep your current plan or help you switch to one that fits better.' },
+  { q: 'What information do you need to renew?', a: 'Your current product (Standard, Plus, Premium, Small Office, etc.), the number of devices and the approximate expiry date.' },
+  { q: 'Does renewal include support?', a: 'Yes, we help with activation and verification. If needed, also remote or on-site installation.' },
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/renovar-kaspersky-panama/"
+  title="Renew Kaspersky license in Panama | Solutech"
+  description="Renew your Kaspersky license in Panama with Solutech: home, Small Office and business. Fast renewal, original licenses and local support. Quote on WhatsApp."
+  h1="Renew your Kaspersky license in Panama"
+  intro="Is your Kaspersky license about to expire or already expired? We handle your renewal quickly, with original licenses and local support. Applies to home, Small Office and business."
+  eyebrow="Renewal"
+  breadcrumbName="Renew"
+  faqs={faqs}
+  waText="Hi, I'd like to renew my Kaspersky license. Current product: ___. Devices: ___. Expires: ___."
+  ctaHeading="Renew without hassle"
+  ctaText="Tell us your current product, number of devices and expiry date. We handle the rest."
+  ctaLabel="Renew on WhatsApp"
+>
+  <section class="section"><div class="container">
+    <h2>How does renewal work?</h2>
+    <div class="grid cols-3 mt-3">
+      <article class="card"><div class="title"><Icon name="send" /> 1. Tell us</div><p class="desc" style="margin:0">Send us your current product, devices and expiry date on WhatsApp.</p></article>
+      <article class="card"><div class="title"><Icon name="receipt" /> 2. We quote</div><p class="desc" style="margin:0">We send the renewal price (with ITBMS if applicable) and payment methods.</p></article>
+      <article class="card"><div class="title"><Icon name="check" /> 3. We activate</div><p class="desc" style="margin:0">You receive your license and, if needed, we help you activate it on your devices.</p></article>
+    </div>
+    <div class="btn-row mt-4">
+      <a class="btn" href="/en/kaspersky-standard-panama/"><Icon name="home" /> Home plans</a>
+      <a class="btn" href="/en/kaspersky-small-office-security-panama/"><Icon name="briefcase" /> Small Office</a>
+      <a class="btn" href="/en/kaspersky-endpoint-security-cloud-panama/"><Icon name="cloud" /> Business</a>
+    </div>
+  </div></section>
+</ProductLayout>

@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import { type Lang } from '../data/i18n';
+interface Props {
+  lang: Lang;
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  metrics?: Array<{ n: string; t: string }>;
+  split?: boolean;
+}
+const { lang, eyebrow, title, subtitle, primaryHref, primaryLabel, secondaryHref, secondaryLabel, metrics = [], split = false } = Astro.props;
+const ext = (h) => h.startsWith('http');
+---
+<section class="hero">
+  <div class="container">
+    <div class={`hero-grid ${split ? '' : 'solo'}`}>
+      <div>
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+        <h1 class="reveal" set:html={title}></h1>
+        <p class="sub reveal" style="--d:.08s">{subtitle}</p>
+        <div class="btn-row hero-cta reveal" style="--d:.16s">
+          <a class="btn teal lg" href={primaryHref} target={ext(primaryHref) ? '_blank' : null} rel={ext(primaryHref) ? 'noopener' : null}>
+            <Icon name="whatsapp" /> {primaryLabel}
+          </a>
+          {secondaryHref && <a class="btn lg" href={secondaryHref}>{secondaryLabel}</a>}
+        </div>
+        {metrics.length > 0 && (
+          <div class="metrics reveal" style="--d:.24s">
+            {metrics.map((m) => (
+              <div class="m"><span class="n">{m.n}</span><span class="t">{m.t}</span></div>
+            ))}
+          </div>
+        )}
+      </div>
+      {split && (
+        <div class="lic-stack reveal" style="--d:.2s">
+          <slot name="visual" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>

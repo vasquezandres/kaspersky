@@ -1,0 +1,59 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Icon from '../../components/Icon.astro';
+const lang = 'en' as const;
+const faqs = [
+  { q: 'What is Endpoint Security Cloud?', a: 'It is Kaspersky\u2019s solution for businesses with centralized cloud management: you manage the security of all devices from a web console, with no local server.' },
+  { q: 'How many devices does it cover?', a: 'From 10 to hundreds of devices. There are Cloud, Cloud Plus and Cloud Pro editions depending on required features.' },
+  { q: 'What is the difference between Cloud, Plus and Pro?', a: 'Cloud is the base; Plus expands capabilities for IT teams; Pro adds advanced protection and features for large fleets and servers. We advise based on your case.' },
+  { q: 'Does Solutech help with deployment?', a: 'Yes. We support you with rollout, policy configuration and ongoing support.' },
+  { q: 'Does it include mobile protection?', a: 'Yes, management covers endpoints and mobile devices depending on the edition.' },
+  { q: 'Do I need a server for Endpoint Security Cloud?', a: 'No. All management is in the cloud through a web console; you do not need to install or maintain a local server.' },
+  { q: 'Which edition suits me: Cloud, Plus or Pro?', a: 'It depends on the features you need (EDR, encryption, patching, advanced control). Tell us your scenario and we recommend the right edition so you do not overpay.' }
+];
+---
+<ProductLayout
+  lang={lang}
+  esPath="/kaspersky-endpoint-security-cloud-panama/"
+  title="Kaspersky Endpoint Security Cloud Panama | Business — Solutech"
+  description="Kaspersky Endpoint Security Cloud in Panama: business protection with centralized cloud management for 10+ devices. Cloud, Plus and Pro editions. Quotes and local support."
+  h1="Kaspersky Endpoint Security Cloud in Panama"
+  intro="Business protection managed from the cloud: manage the security of all your devices and mobiles from a single console, with no local server. Ideal for growing companies."
+  eyebrow="Business / B2B"
+  breadcrumbName="Endpoint Security Cloud"
+  segment="business"
+  configHeading="Configure your Endpoint Security Cloud"
+  faqs={faqs}
+  waText="Hi, I'd like a quote for Kaspersky Endpoint Security Cloud for ___ devices."
+  ctaHeading="Business security in the cloud"
+  ctaText="Tell us how many devices you have and we'll recommend the right edition (Cloud, Plus or Pro) with deployment support."
+  ctaLabel="Talk to a specialist"
+>
+  <section class="section"><div class="container"><div class="grid cols-3">
+    <article class="card"><div class="title"><Icon name="cloud" /> Centralized management</div><p class="desc" style="margin:0">A single web console to manage the security of all company devices and mobiles.</p></article>
+    <article class="card"><div class="title"><Icon name="building" /> For businesses</div><p class="desc" style="margin:0">From 10 devices upward, with editions scaling to hundreds of devices and servers.</p></article>
+    <article class="card"><div class="title"><Icon name="tools" /> Deployment included</div><p class="desc" style="margin:0">Solutech Panamá supports you with rollout, security policies and ongoing support.</p></article>
+  </div></div></section>
+  <section class="section bg-alt">
+    <div class="container">
+      <div class="grid cols-2" style="gap:40px;align-items:start">
+        <div>
+          <h2>What does Endpoint Security Cloud include?</h2>
+          <ul class="list" style="list-style:none;padding:0;display:grid;gap:11px;margin-top:14px">
+            <li><Icon name="check" /> Centralized web management console (no local server)</li>
+            <li><Icon name="check" /> Protection for workstations, servers and mobiles</li>
+            <li><Icon name="check" /> Device and web access control</li>
+            <li><Icon name="check" /> Advanced features by edition (Cloud, Plus, Pro)</li>
+            <li><Icon name="check" /> Deployment and rollout support by Solutech</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="title"><Icon name="users" /> Who is it ideal for?</div>
+          <p class="desc">Ideal for growing companies that need to manage the security of all devices from one place, with centralized policies and no local infrastructure.</p>
+          <p class="muted" style="font-size:.86rem;margin:0">Not sure which to choose? Message us and we will advise you with no obligation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ProductLayout>
