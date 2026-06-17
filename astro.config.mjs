@@ -18,6 +18,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter: (page) =>
+        !/\/(cotizar|gracias|quote|thank-you)\/?$/.test(page),
       i18n: {
         defaultLocale: 'es',
         locales: { es: 'es-PA', en: 'en' },

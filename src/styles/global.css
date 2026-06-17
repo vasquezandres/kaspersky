@@ -49,6 +49,7 @@ html[data-theme='dark'] {
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html, body { max-width: 100%; overflow-x: hidden; }
 body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
 h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 .4em; }
@@ -105,11 +106,18 @@ html[data-theme='dark'] .announcement { color: #062420; }
 .nav a:hover { color: var(--text); background: var(--bg-alt); text-decoration: none; }
 .nav a[aria-current='page'] { color: var(--accent-text); }
 
-.header-actions { display: flex; align-items: center; gap: 10px; }
-.lang-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-.lang-switch a { padding: 6px 10px; font-size: .78rem; font-weight: 600; color: var(--muted); }
-.lang-switch a:hover { text-decoration: none; background: var(--bg-alt); }
-.lang-switch a[aria-current='true'] { background: var(--brand); color: #fff; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.lang-dd { position: relative; }
+.lang-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 9px; padding: 8px 10px; font-family: var(--font-display); font-size: .82rem; font-weight: 600; cursor: pointer; }
+.lang-btn:hover { background: var(--bg-alt); }
+.lang-btn .icon { width: 16px; height: 16px; color: var(--muted); }
+.lang-btn .caret { width: 14px; height: 14px; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s; }
+.lang-btn[aria-expanded='true'] .caret { transform: rotate(180deg); }
+.lang-menu { position: absolute; top: calc(100% + 6px); right: 0; min-width: 150px; background: var(--card); border: 1px solid var(--border); border-radius: 11px; box-shadow: var(--shadow-md); padding: 6px; display: none; z-index: 120; }
+.lang-menu.open { display: block; }
+.lang-menu a { display: block; padding: 10px 12px; border-radius: 8px; font-size: .9rem; font-weight: 500; color: var(--text); }
+.lang-menu a:hover { background: var(--bg-alt); text-decoration: none; }
+.lang-menu a[aria-current='true'] { color: var(--accent-text); font-weight: 700; }
 
 .theme-toggle, .hamburger { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: transparent; color: var(--text); width: 38px; height: 38px; border-radius: 9px; cursor: pointer; }
 .theme-toggle:hover, .hamburger:hover { background: var(--bg-alt); }
@@ -121,6 +129,13 @@ html[data-theme='dark'] .announcement { color: #062420; }
   .nav.open { display: flex; }
   .nav a { padding: 12px; }
   .hamburger { display: inline-flex; }
+  /* En móvil el WhatsApp lo cubre el botón flotante; el selector de idioma se mantiene visible */
+  .header-actions .wa-btn { display: none; }
+}
+@media (max-width: 420px) {
+  .container { padding: 0 16px; }
+  .brand-link { font-size: .98rem; }
+  .header-actions { gap: 6px; }
 }
 
 /* ---------------- Buttons ---------------- */

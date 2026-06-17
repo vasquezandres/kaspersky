@@ -31,11 +31,17 @@ const enHref = lang === 'es' ? toEn(esPath) : esPath;
     </nav>
 
     <div class="header-actions">
-      <div class="lang-switch" role="group" aria-label={t.language}>
-        <a href={esHref} aria-current={lang === 'es' ? 'true' : 'false'} hreflang="es-PA">ES</a>
-        <a href={enHref} aria-current={lang === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
+      <div class="lang-dd">
+        <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label={t.language}>
+          <Icon name="globe" /> <span>{lang === 'es' ? 'ES' : 'EN'}</span>
+          <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="lang-menu" class="lang-menu" role="menu">
+          <a href={esHref} role="menuitem" hreflang="es-PA" aria-current={lang === 'es' ? 'true' : 'false'}>Español</a>
+          <a href={enHref} role="menuitem" hreflang="en" aria-current={lang === 'en' ? 'true' : 'false'}>English</a>
+        </div>
       </div>
-      <a class="btn primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp">
+      <a class="btn primary wa-btn" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp">
         <Icon name="whatsapp" /> <span class="wa-text">WhatsApp</span>
       </a>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label={lang === 'es' ? 'Cambiar tema' : 'Toggle theme'}>
@@ -77,6 +83,20 @@ const enHref = lang === 'es' ? toEn(esPath) : esPath;
     burger?.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    var langBtn = document.getElementById('lang-btn');
+    var langMenu = document.getElementById('lang-menu');
+    langBtn?.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = langMenu.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (langMenu && !langMenu.contains(e.target) && e.target !== langBtn && !langBtn.contains(e.target)) {
+        langMenu.classList.remove('open');
+        langBtn?.setAttribute('aria-expanded', 'false');
+      }
     });
   })();
 </script>
