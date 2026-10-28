@@ -5,7 +5,8 @@ import DisclaimerBanner from '../components/DisclaimerBanner.astro';
 import TrustSection from '../components/TrustSection.astro';
 import FAQ from '../components/FAQ.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
-import Icon from '../components/Icon.astro';
+import Icon, { type IconName } from '../components/Icon.astro';
+import IconCardGrid from '../components/IconCardGrid.astro';
 import { site, waLink } from '../data/site';
 import { ui } from '../data/i18n';
 
@@ -32,7 +33,7 @@ const faqs = [
   { q: '¿Cómo calculo el precio para mi empresa por cantidad de equipos?', a: 'En las páginas de <a href="/kaspersky-small-office-security-panama/">Small Office Security</a> y <a href="/kaspersky-endpoint-security-cloud-panama/">Endpoint Security Cloud</a> puedes ajustar la cantidad de nodos y ver el total estimado al instante. Para escenarios mixtos (equipos + servidores) te armamos una cotización a medida.' },
 ];
 
-const which = [
+const which: Array<{ icon: IconName; t: string; d: string }> = [
   { icon: 'home', t: 'Para 1 computadora personal', d: 'Kaspersky Standard o Plus para 1 dispositivo.' },
   { icon: 'users', t: 'Para varios dispositivos', d: 'Planes de 3, 5 o 10 dispositivos en Standard, Plus o Premium.' },
   { icon: 'shield', t: 'Para familia', d: 'Premium multi-dispositivo o Safe Kids para control parental.' },
@@ -161,6 +162,7 @@ const support = [
         data-sheet-id={site.sheetId}
         data-sheet={site.defaultSheet}
         data-quote="/cotizar/"
+        data-wa={site.whatsapp}
       >
         <p class="muted">Cargando planes…</p>
       </div>
@@ -190,19 +192,7 @@ const support = [
   </section>
 
   <!-- ¿CUÁL LICENCIA NECESITO? -->
-  <section class="section bg-alt">
-    <div class="container">
-      <h2 class="center">¿Cuál licencia necesito?</h2>
-      <div class="grid cols-3 mt-4">
-        {which.map((w) => (
-          <article class="card hover">
-            <div class="title"><Icon name={w.icon} /> {w.t}</div>
-            <p class="desc" style="margin:0">{w.d}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <IconCardGrid heading="¿Cuál licencia necesito?" items={which} />
 
   <!-- SOPORTE -->
   <section class="section">
@@ -276,46 +266,27 @@ const support = [
 
   <script type="module" src="/scripts/pricing.js"></script>
   <script type="module" define:vars={{ SHEET_ID: site.sheetId, DEFAULT_SHEET: site.defaultSheet }}>
+    import { fetchPriceBySKU } from '/scripts/sheet.js';
     // Precio en vivo de la tarjeta destacada del hero
     (async () => {
       const box = document.getElementById('hero-price');
       if (!box) return;
-      const sku = box.dataset.sku;
-      try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(DEFAULT_SHEET)}`;
-        const raw = await fetch(url).then((r) => r.text());
-        const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
-        const cols = json.table.cols.map((c) => c.label);
-        const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
-        const list = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
-        const row = list.find((r) => String(r.SKU || '').trim() === sku);
-        const price = row ? +String(row.PrecioUSD || '0').replace(/[^0-9.]/g, '') : 0;
-        if (price > 0) {
-          document.getElementById('hero-price-val').textContent = new Intl.NumberFormat('es-PA', { style: 'currency', currency: 'USD' }).format(price);
-          document.getElementById('hero-price-note').textContent = '/ año · 3 dispositivos';
-          box.removeAttribute('data-state');
-        } else {
-          document.getElementById('hero-price-val').textContent = 'Ver precio';
-        }
-      } catch (e) {
+      const price = await fetchPriceBySKU(SHEET_ID, DEFAULT_SHEET, box.dataset.sku);
+      if (price > 0) {
+        document.getElementById('hero-price-val').textContent = new Intl.NumberFormat('es-PA', { style: 'currency', currency: 'USD' }).format(price);
+        document.getElementById('hero-price-note').textContent = '/ año · 3 dispositivos';
+        box.removeAttribute('data-state');
+      } else {
         document.getElementById('hero-price-val').textContent = 'Ver precio';
       }
     })();
   </script>
-  <script is:inline>
-    (function () {
-      var form = document.getElementById('contact-form');
-      if (!form) return;
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        var btn = form.querySelector('button[type=submit]');
-        if (btn) btn.disabled = true;
-        try {
-          var res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-          if (res.ok) { location.href = '/gracias/'; }
-          else { alert('No pudimos enviar el formulario. Escríbenos por WhatsApp.'); if (btn) btn.disabled = false; }
-        } catch (err) { alert('Error de red. Intenta de nuevo o escríbenos por WhatsApp.'); if (btn) btn.disabled = false; }
-      });
-    })();
+  <script type="module" is:inline>
+    import { wireAjaxForm } from '/scripts/ajax-form.js';
+    wireAjaxForm('contact-form', {
+      redirectTo: '/gracias/',
+      errorMsg: 'No pudimos enviar el formulario. Escríbenos por WhatsApp.',
+      networkErrorMsg: 'Error de red. Intenta de nuevo o escríbenos por WhatsApp.',
+    });
   </script>
 </BaseLayout>

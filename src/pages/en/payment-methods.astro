@@ -5,9 +5,9 @@ import Icon from '../../components/Icon.astro';
 import { waLink, site } from '../../data/site';
 const lang = 'en' as const;
 const methods = [
-  { name: 'Yappy', img: '/assets/img/payments/yappy.webp', desc: 'Fast local mobile payment. We share the Yappy directory when confirming your quote.' },
-  { name: 'Banco General', img: '/assets/img/payments/bancogeneral.webp', desc: 'Transfer or ACH to a Solutech Panamá account. We send the details when quoting.' },
-  { name: 'PayPal', img: '/assets/img/payments/paypal.webp', desc: 'International option. Fees may apply depending on the method.' },
+  { name: 'Yappy', img: '/assets/img/payments/yappy.webp', alt: 'Yappy logo, mobile payments in Panama', desc: 'Fast local mobile payment. We share the Yappy directory when confirming your quote.' },
+  { name: 'Banco General', img: '/assets/img/payments/bancogeneral.webp', alt: 'Banco General logo', desc: 'Transfer or ACH to a Solutech Panamá account. We send the details when quoting.' },
+  { name: 'PayPal', img: '/assets/img/payments/paypal.webp', alt: 'PayPal logo', desc: 'International option. Fees may apply depending on the method.' },
 ];
 ---
 <BaseLayout lang={lang} esPath="/pagos/"
@@ -24,7 +24,7 @@ const methods = [
     <div class="grid cols-3">
       {methods.map((m) => (
         <article class="card hover">
-          <img src={m.img} alt={m.name} width="120" height="48" loading="lazy" style="height:42px;width:auto;object-fit:contain" />
+          <img src={m.img} alt={m.alt} width="120" height="48" loading="lazy" style="height:42px;width:auto;object-fit:contain" />
           <div class="title">{m.name}</div><p class="desc" style="margin:0">{m.desc}</p>
         </article>
       ))}

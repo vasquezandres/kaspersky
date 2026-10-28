@@ -1,9 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <rect width="1200" height="630" fill="#fbfbfa"/>
   <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#e6e6e3" stroke-width="2"/>
+  <defs>
+    <linearGradient id="ogBrandGrad" x1="84" y1="86" x2="148" y2="156" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0c5f58"/>
+    </linearGradient>
+  </defs>
   <g transform="translate(80,84)">
-    <rect width="76" height="76" rx="16" fill="#0f766e"/>
-    <text x="38" y="51" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#ffffff">S</text>
+    <path d="M38 2 L72 13 V34 C72 53 60 65 38 72 C16 65 4 53 4 34 V13 Z" fill="url(#ogBrandGrad)"/>
+    <text x="38" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">S</text>
     <text x="98" y="33" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#18181b">Solutech Panamá</text>
     <text x="98" y="62" font-family="monospace" font-size="16" fill="#5f6066" letter-spacing="2">PROVEEDOR INDEPENDIENTE</text>
   </g>

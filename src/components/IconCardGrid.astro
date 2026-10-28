@@ -1,0 +1,22 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+interface Props {
+  heading: string;
+  items: Array<{ icon: IconName; t: string; d: string }>;
+}
+const { heading, items } = Astro.props;
+---
+<section class="section bg-alt">
+  <div class="container">
+    <h2 class="center">{heading}</h2>
+    <div class="grid cols-3 mt-4">
+      {items.map((w) => (
+        <article class="card hover">
+          <div class="title"><Icon name={w.icon} /> {w.t}</div>
+          <p class="desc" style="margin:0">{w.d}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -16,7 +16,8 @@ cotizar y renovar **licencias Kaspersky en Panamá** con soporte local de **Solu
 - **@astrojs/sitemap** con alternantes hreflang
 - **Sin frameworks pesados ni Font Awesome** (íconos SVG inline propios)
 - Precios **en vivo** desde Google Sheets (lado cliente, sin rebuild)
-- Fuentes: Sora (titulares) + Inter (texto), con `display=swap` + preconnect
+- Fuente: Plus Jakarta Sans (titulares y texto), autohospedada en `public/fonts/`
+  (`src/styles/fonts.css`), sin dependencia de Google Fonts en runtime
 
 ## 2. Correr en local
 
@@ -43,7 +44,11 @@ npm run preview
 4. Deploy. El dominio `kasperskypanama.com` apunta al proyecto de Pages.
 
 > `public/_redirects` ya incluye las redirecciones 301 desde las rutas viejas (`.html`)
-> y se copia automáticamente a `dist/` en cada build.
+> y se copia automáticamente a `dist/` en cada build. `public/_headers` trae cabeceras
+> de seguridad (CSP, X-Frame-Options, etc.) y cache-control para assets.
+
+> El directorio `functions/` (Cloudflare Pages Functions, ver sección 4) se despliega
+> automáticamente junto al sitio — no requiere configuración extra en Cloudflare Pages.
 
 ## 4. Precios desde Google Sheets
 
@@ -61,7 +66,31 @@ actualizar precios en la hoja sin volver a desplegar**.
 
 El catálogo de productos vive en `public/data/products.json`
 (segmentos `home`, `smalloffice`, `business`; tipos `devices`, `range`, `fixed`).
-El motor está en `public/scripts/pricing.js`.
+El motor está en `public/scripts/pricing.js`, que lee la hoja a través de
+`public/scripts/sheet.js`.
+
+#### Caché en el edge (`functions/api/prices.js`)
+
+El navegador **no llama a Google directamente**: primero pide `/api/prices`, una
+**Cloudflare Pages Function** que:
+
+- Cachea la hoja ~5 min en el edge (`Cache-Control: s-maxage=300`), así páginas con
+  mucho tráfico no disparan un fetch a Google en cada carga.
+- Solo expone las columnas públicas (`SKU`, `Producto`, `PrecioUSD`) — la hoja también
+  tiene columnas de costo/margen (`Costo`, `Utilidad`, `% de ganancia global`) que
+  **nunca** llegan al navegador.
+- El `sheetId` está fijo en el servidor (no se acepta por query), solo el nombre de
+  la pestaña (`?sheet=`) es configurable.
+
+Si `/api/prices` no responde (p. ej. en `astro dev` local, donde no corren Pages
+Functions), el cliente cae automáticamente al fetch directo a Google Sheets —
+ese camino sí trae todas las columnas, por eso solo debería activarse en desarrollo.
+
+Para probar las Functions localmente con el runtime real de Cloudflare:
+
+```bash
+npm run preview:cf   # build + wrangler pages dev (sirve /api/prices de verdad)
+```
 
 ### Cambiar datos del negocio
 Todo está centralizado en `src/data/site.ts` (WhatsApp, teléfono, correo,
@@ -106,7 +135,7 @@ Formspree, Sheet ID, redes, color de marca). Las rutas/idiomas en `src/data/i18n
 ```
 src/
   data/         site.ts (negocio) · i18n.ts (idiomas/rutas/copys)
-  styles/       global.css (design system Solutech #ff1748, claro/oscuro)
+  styles/       global.css (design system Solutech #0f766e, claro/oscuro)
   components/   Icon, SEO, Header, Footer, Hero, FAQ, TrustSection,
                 DisclaimerBanner, WhatsAppFab, *JsonLd
   layouts/      BaseLayout, ProductLayout

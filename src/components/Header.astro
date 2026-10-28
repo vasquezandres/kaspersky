@@ -2,6 +2,7 @@
 import { site } from '../data/site';
 import { nav, ui, type Lang, toEn, toEs } from '../data/i18n';
 import Icon from './Icon.astro';
+import BrandLogo from './BrandLogo.astro';
 
 interface Props { lang: Lang; esPath: string; }
 const { lang, esPath } = Astro.props;
@@ -17,7 +18,7 @@ const enHref = lang === 'es' ? toEn(esPath) : esPath;
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand-link" href={lang === 'es' ? '/' : '/en/'} aria-label="Solutech Panamá — inicio">
-      <span class="brand-mark">S</span>
+      <BrandLogo id="headerBrandGrad" />
       <span>Solutech Panamá<small>Licencias Kaspersky</small></span>
     </a>
 
@@ -87,15 +88,36 @@ const enHref = lang === 'es' ? toEn(esPath) : esPath;
 
     var langBtn = document.getElementById('lang-btn');
     var langMenu = document.getElementById('lang-menu');
+    var langItems = langMenu ? Array.from(langMenu.querySelectorAll('[role=menuitem]')) : [];
+    function closeLangMenu(focusBtn) {
+      langMenu?.classList.remove('open');
+      langBtn?.setAttribute('aria-expanded', 'false');
+      if (focusBtn) langBtn?.focus();
+    }
     langBtn?.addEventListener('click', function (e) {
       e.stopPropagation();
       var open = langMenu.classList.toggle('open');
       langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) langItems[0]?.focus();
+    });
+    langBtn?.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        langMenu.classList.add('open');
+        langBtn.setAttribute('aria-expanded', 'true');
+        langItems[0]?.focus();
+      }
+    });
+    langMenu?.addEventListener('keydown', function (e) {
+      var idx = langItems.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); langItems[(idx + 1) % langItems.length]?.focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); langItems[(idx - 1 + langItems.length) % langItems.length]?.focus(); }
+      else if (e.key === 'Escape') { e.preventDefault(); closeLangMenu(true); }
+      else if (e.key === 'Tab') { closeLangMenu(false); }
     });
     document.addEventListener('click', function (e) {
       if (langMenu && !langMenu.contains(e.target) && e.target !== langBtn && !langBtn.contains(e.target)) {
-        langMenu.classList.remove('open');
-        langBtn?.setAttribute('aria-expanded', 'false');
+        closeLangMenu(false);
       }
     });
   })();

@@ -98,6 +98,7 @@ html[data-theme='dark'] .announcement { color: #062420; }
 .brand-link { display: inline-flex; align-items: center; gap: 11px; font-family: var(--font-display); font-weight: 800; color: var(--text); font-size: 1.05rem; letter-spacing: -.02em; }
 .brand-link:hover { text-decoration: none; }
 .brand-mark { width: 32px; height: 32px; border-radius: 9px; flex: 0 0 auto; background: var(--brand); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: .95rem; }
+.brand-logo { width: 32px; height: 32px; flex: 0 0 auto; }
 .brand-link > span { white-space: nowrap; }
 .brand-link small { display: block; white-space: nowrap; font-size: .62rem; font-weight: 500; color: var(--muted); letter-spacing: .02em; }
 

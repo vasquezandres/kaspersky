@@ -5,7 +5,8 @@ import DisclaimerBanner from '../../components/DisclaimerBanner.astro';
 import TrustSection from '../../components/TrustSection.astro';
 import FAQ from '../../components/FAQ.astro';
 import FaqJsonLd from '../../components/FaqJsonLd.astro';
-import Icon from '../../components/Icon.astro';
+import Icon, { type IconName } from '../../components/Icon.astro';
+import IconCardGrid from '../../components/IconCardGrid.astro';
 import { site, waLink } from '../../data/site';
 import { ui } from '../../data/i18n';
 
@@ -32,7 +33,7 @@ const faqs = [
   { q: 'How do I calculate the price for my company by device count?', a: 'On the <a href="/en/kaspersky-small-office-security-panama/">Small Office Security</a> and <a href="/en/kaspersky-endpoint-security-cloud-panama/">Endpoint Security Cloud</a> pages you can adjust the number of nodes and see the estimated total instantly. For mixed setups (devices + servers) we prepare a tailored quote.' },
 ];
 
-const which = [
+const which: Array<{ icon: IconName; t: string; d: string }> = [
   { icon: 'home', t: 'For one personal computer', d: 'Kaspersky Standard or Plus for a single device.' },
   { icon: 'users', t: 'For multiple devices', d: 'Plans for 3, 5 or 10 devices in Standard, Plus or Premium.' },
   { icon: 'shield', t: 'For families', d: 'Premium multi-device or Safe Kids for parental control.' },
@@ -147,7 +148,7 @@ const support = [
       <div class="grid cols-3"
         data-pricing data-segment="home" data-lang="en"
         data-only="Kaspersky Standard (LA),Kaspersky Plus (LA),Kaspersky Premium (LA)"
-        data-sheet-id={site.sheetId} data-sheet={site.defaultSheet} data-quote="/en/quote/">
+        data-sheet-id={site.sheetId} data-sheet={site.defaultSheet} data-quote="/en/quote/" data-wa={site.whatsapp}>
         <p class="muted">Loading plans…</p>
       </div>
 
@@ -175,16 +176,7 @@ const support = [
     </div>
   </section>
 
-  <section class="section bg-alt">
-    <div class="container">
-      <h2 class="center">Which license do I need?</h2>
-      <div class="grid cols-3 mt-4">
-        {which.map((w) => (
-          <article class="card hover"><div class="title"><Icon name={w.icon} /> {w.t}</div><p class="desc" style="margin:0">{w.d}</p></article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <IconCardGrid heading="Which license do I need?" items={which} />
 
   <section class="section">
     <div class="container">
@@ -248,41 +240,24 @@ const support = [
 
   <script type="module" src="/scripts/pricing.js"></script>
   <script type="module" define:vars={{ SHEET_ID: site.sheetId, DEFAULT_SHEET: site.defaultSheet }}>
+    import { fetchPriceBySKU } from '/scripts/sheet.js';
     (async () => {
       const box = document.getElementById('hero-price');
       if (!box) return;
-      const sku = box.dataset.sku;
-      try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(DEFAULT_SHEET)}`;
-        const raw = await fetch(url).then((r) => r.text());
-        const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
-        const cols = json.table.cols.map((c) => c.label);
-        const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
-        const list = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
-        const row = list.find((r) => String(r.SKU || '').trim() === sku);
-        const price = row ? +String(row.PrecioUSD || '0').replace(/[^0-9.]/g, '') : 0;
-        if (price > 0) {
-          document.getElementById('hero-price-val').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-          document.getElementById('hero-price-note').textContent = '/ year · 3 devices';
-          box.removeAttribute('data-state');
-        } else { document.getElementById('hero-price-val').textContent = 'View price'; }
-      } catch (e) { document.getElementById('hero-price-val').textContent = 'View price'; }
+      const price = await fetchPriceBySKU(SHEET_ID, DEFAULT_SHEET, box.dataset.sku);
+      if (price > 0) {
+        document.getElementById('hero-price-val').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+        document.getElementById('hero-price-note').textContent = '/ year · 3 devices';
+        box.removeAttribute('data-state');
+      } else { document.getElementById('hero-price-val').textContent = 'View price'; }
     })();
   </script>
-  <script is:inline>
-    (function () {
-      var form = document.getElementById('contact-form');
-      if (!form) return;
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        var btn = form.querySelector('button[type=submit]');
-        if (btn) btn.disabled = true;
-        try {
-          var res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-          if (res.ok) { location.href = '/en/thank-you/'; }
-          else { alert('We could not send the form. Please contact us on WhatsApp.'); if (btn) btn.disabled = false; }
-        } catch (err) { alert('Network error. Please try again or contact us on WhatsApp.'); if (btn) btn.disabled = false; }
-      });
-    })();
+  <script type="module" is:inline>
+    import { wireAjaxForm } from '/scripts/ajax-form.js';
+    wireAjaxForm('contact-form', {
+      redirectTo: '/en/thank-you/',
+      errorMsg: 'We could not send the form. Please contact us on WhatsApp.',
+      networkErrorMsg: 'Network error. Please try again or contact us on WhatsApp.',
+    });
   </script>
 </BaseLayout>

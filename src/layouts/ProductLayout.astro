@@ -72,7 +72,7 @@ const canonicalPath = isEs ? esPath : esPath; // SEO usa esPath internamente
         <div class="grid cols-3 mt-3"
           data-pricing data-segment={segment} data-lang={lang}
           data-sheet-id={site.sheetId} data-sheet={site.defaultSheet} data-quote={quoteBase}
-          data-match={match}>
+          data-wa={site.whatsapp} data-match={match}>
           <p class="muted">{isEs ? 'Cargando…' : 'Loading…'}</p>
         </div>
         <p class="muted mt-3" style="font-size:.86rem">{t.priceNote}</p>

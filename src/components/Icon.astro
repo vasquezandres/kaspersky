@@ -1,7 +1,13 @@
 ---
 // Conjunto mínimo de íconos SVG inline (sin dependencias externas).
 // Uso: <Icon name="whatsapp" /> ; tamaño/color heredan de la clase .icon (CSS).
-interface Props { name: string; class?: string; }
+export type IconName =
+  | 'shield' | 'home' | 'briefcase' | 'building' | 'refresh' | 'tools' | 'card'
+  | 'check' | 'star' | 'phone' | 'mail' | 'clock' | 'map' | 'globe' | 'cloud'
+  | 'lock' | 'info' | 'menu' | 'close' | 'sun' | 'moon' | 'send' | 'users'
+  | 'bolt' | 'receipt' | 'whatsapp';
+
+interface Props { name: IconName; class?: string; }
 const { name, class: cls = '' } = Astro.props;
 
 // Paths con stroke (heredan stroke=currentColor desde .icon)

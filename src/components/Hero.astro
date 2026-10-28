@@ -14,7 +14,7 @@ interface Props {
   split?: boolean;
 }
 const { lang, eyebrow, title, subtitle, primaryHref, primaryLabel, secondaryHref, secondaryLabel, metrics = [], split = false } = Astro.props;
-const ext = (h) => h.startsWith('http');
+const ext = (h: string) => h.startsWith('http');
 ---
 <section class="hero">
   <div class="container">

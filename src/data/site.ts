@@ -15,8 +15,8 @@ export const site = {
   phoneAltTel: '+5073958353',
   email: 'soporte@solutechpanama.com',
 
-  // Marca / color
-  brandColor: '#ff1748',
+  // Marca / color (debe coincidir con --brand en src/styles/global.css)
+  brandColor: '#0f766e',
 
   // Precios — Google Sheets (gviz/tq). Hoja por defecto: "kaspersky".
   // Columnas esperadas en la hoja: SKU | PrecioUSD | Producto

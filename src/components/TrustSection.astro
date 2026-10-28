@@ -1,11 +1,12 @@
 ---
-import Icon from './Icon.astro';
+import { type IconName } from './Icon.astro';
+import IconCardGrid from './IconCardGrid.astro';
 import { type Lang } from '../data/i18n';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const isEs = lang === 'es';
 const heading = isEs ? '¿Por qué elegir a Solutech Panamá?' : 'Why choose Solutech Panamá?';
-const items = isEs
+const items: Array<{ icon: IconName; t: string; d: string }> = isEs
   ? [
       { icon: 'map', t: 'Atención local en Panamá', d: 'Soporte real en español, presencial en Ciudad de Panamá y remoto en todo el país.' },
       { icon: 'shield', t: 'Licencias originales', d: 'Comercializamos licencias Kaspersky originales con asesoría para elegir el plan correcto.' },
@@ -23,16 +24,4 @@ const items = isEs
       { icon: 'users', t: 'Home, professionals & business', d: 'From a single personal device to corporate fleets with cloud management.' },
     ];
 ---
-<section class="section bg-alt">
-  <div class="container">
-    <h2 class="center">{heading}</h2>
-    <div class="grid cols-3 mt-4">
-      {items.map((i) => (
-        <article class="card hover">
-          <div class="title"><Icon name={i.icon} /> {i.t}</div>
-          <p class="desc" style="margin:0">{i.d}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
+<IconCardGrid heading={heading} items={items} />

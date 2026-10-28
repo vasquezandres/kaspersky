@@ -8,10 +8,11 @@
    Config vía data-attrs en el contenedor [data-pricing]:
      data-segment="home|smalloffice|business"
      data-lang="es|en"  data-sheet-id="..."  data-quote="/cotizar/"
+     data-wa="50768886778" (opcional; por defecto toma el de site.ts)
    ============================================================= */
-(function () {
-  const WA = '50768886778';
+import { fetchPriceMap } from './sheet.js';
 
+(function () {
   const mounts = document.querySelectorAll('[data-pricing]');
   if (!mounts.length) return;
 
@@ -55,27 +56,6 @@
 
   function fmt(n, locale) {
     return new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD' }).format(+n || 0);
-  }
-
-  async function fetchPrices(sheetId, sheet) {
-    try {
-      const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheet)}`;
-      const raw = await fetch(url).then((r) => r.text());
-      const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
-      const cols = json.table.cols.map((c) => c.label);
-      const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
-      const data = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
-      return new Map(
-        data
-          .filter((r) => r.SKU)
-          .map((r) => [
-            String(r.SKU).trim(),
-            { price: +String(r.PrecioUSD || '0').replace(/[^0-9.]/g, ''), name: r.Producto || '' },
-          ])
-      );
-    } catch (e) {
-      return new Map(); // tolerante a fallos: tabla seguirá mostrando "Consultar"
-    }
   }
 
   // ---------- helpers de UI ----------
@@ -200,10 +180,11 @@
     const sheetId = mount.dataset.sheetId;
     const sheet = mount.dataset.sheet || 'kaspersky';
     const quoteBase = mount.dataset.quote || (lang === 'en' ? '/en/quote/' : '/cotizar/');
+    const wa = mount.dataset.wa || '50768886778';
     const t = T[lang];
 
     const [priceMap, products] = await Promise.all([
-      fetchPrices(sheetId, sheet),
+      fetchPriceMap(sheetId, sheet),
       fetch('/data/products.json').then((r) => r.json()).catch(() => ({})),
     ]);
 
@@ -318,17 +299,17 @@
       }
 
       // WhatsApp por producto
-      const wa = el('a', 'btn wa', t.wa);
-      wa.target = '_blank'; wa.rel = 'noopener';
+      const waBtn = el('a', 'btn wa', t.wa);
+      waBtn.target = '_blank'; waBtn.rel = 'noopener';
       const updWa = () => {
         const sku = card.dataset.sku || '';
         const total = card.dataset.total || '';
         let detail = sku ? `SKU ${sku}.` : '';
         if (total) detail += ` ${t.total}: ${fmt(+total, t.locale)} (${itbmsNote}).`;
-        wa.href = `https://wa.me/${WA}?text=` + encodeURIComponent(t.waText(p.name, detail));
+        waBtn.href = `https://wa.me/${wa}?text=` + encodeURIComponent(t.waText(p.name, detail));
       };
       const rows = card.querySelector('.btn-row');
-      if (rows) rows.append(wa);
+      if (rows) rows.append(waBtn);
       // recalcular href de WhatsApp tras cada cambio
       card.addEventListener('changeValue', updWa, true);
       mount.querySelectorAll('select.variant, .slider, input.variant');

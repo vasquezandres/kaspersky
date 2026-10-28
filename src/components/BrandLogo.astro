@@ -1,0 +1,14 @@
+---
+interface Props { id?: string; size?: number; }
+const { id = 'brandLogoGrad', size = 32 } = Astro.props;
+---
+<svg class="brand-logo" viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
+  <defs>
+    <linearGradient id={id} x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0c5f58"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 3 L55 11 V29 C55 45.5 45.5 56 32 61 C18.5 56 9 45.5 9 29 V11 Z" fill={`url(#${id})`}/>
+  <text x="32" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#ffffff">S</text>
+</svg>

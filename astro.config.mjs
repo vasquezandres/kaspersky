@@ -18,8 +18,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) =>
-        !/\/(cotizar|gracias|quote|thank-you)\/?$/.test(page),
+      filter: (page) => {
+        const excluded = ['/cotizar/', '/gracias/', '/en/quote/', '/en/thank-you/'];
+        const pathname = new URL(page).pathname;
+        return !excluded.includes(pathname);
+      },
       i18n: {
         defaultLocale: 'es',
         locales: { es: 'es-PA', en: 'en' },

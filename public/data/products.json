@@ -113,7 +113,6 @@
       "name": "Kaspersky Endpoint Security Cloud",
       "desc": "Gestión centralizada en la nube para endpoints y móviles. Ideal para PYMEs y corporativos.",
       "tags": ["Cloud","B2B","Endpoints"],
-      "download": "#",
       "range": { "min": 10, "max": 999, "step": 1 },
       "variants": {
         "10-14": { "1": "KL4742DPKFS", "2": "KL4742DPKDS", "3": "KL4742DPKTS" },
@@ -132,7 +131,6 @@
       "name": "Kaspersky Endpoint Security Cloud PLUS",
       "desc": "Todas las funciones de Cloud con capacidades ampliadas para equipos de TI.",
       "tags": ["Cloud","Plus","B2B"],
-      "download": "#",
       "range": { "min": 10, "max": 999, "step": 1 },
       "variants": {
         "10-14": { "1": "KL4743DPKFS", "2": "KL4743DPKDS", "3": "KL4743DPKTS" },
@@ -151,7 +149,6 @@
       "name": "Kaspersky Endpoint Security Cloud PRO",
       "desc": "Protección avanzada con capacidades de seguridad para servidores y flotas grandes.",
       "tags": ["Cloud","Pro","B2B"],
-      "download": "#",
       "range": { "min": 10, "max": 999, "step": 1 },
       "variants": {
         "10-14": { "1": "KL4746DPKFS", "2": "KL4746DPKDS", "3": "KL4746DPKTS" },

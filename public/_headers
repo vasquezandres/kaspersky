@@ -1,0 +1,25 @@
+# Cloudflare Pages — cabeceras de seguridad y cache.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://docs.google.com https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'
+
+# Assets con hash o que no cambian de nombre: cache largo.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/scripts/*
+  Cache-Control: public, max-age=3600
+
+/data/*
+  Cache-Control: public, max-age=300
+
+/favicon.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

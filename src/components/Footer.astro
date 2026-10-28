@@ -2,6 +2,7 @@
 import { site } from '../data/site';
 import { ui, footerBrandNote, type Lang, toEn } from '../data/i18n';
 import Icon from './Icon.astro';
+import BrandLogo from './BrandLogo.astro';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -34,7 +35,7 @@ const p = (es: string, en: string) => (isEs ? es : en);
     <div class="footer-grid">
       <div>
         <a class="brand-link" href={isEs ? '/' : '/en/'}>
-          <span class="brand-mark">S</span>
+          <BrandLogo id="footerBrandGrad" />
           <span>Solutech Panamá<small>Licencias Kaspersky</small></span>
         </a>
         <p class="muted mt-2" style="font-size:.9rem">

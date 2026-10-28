@@ -42,6 +42,9 @@ const lang = 'en' as const;
   </div></section>
 
   <script type="module" define:vars={{ SHEET_ID: site.sheetId, DEFAULT_SHEET: site.defaultSheet, WA: site.whatsapp }}>
+    import { fetchPriceBySKU } from '/scripts/sheet.js';
+    import { wireAjaxForm } from '/scripts/ajax-form.js';
+
     function getParams() { const u = new URL(location.href); const o = {}; u.searchParams.forEach((v, k) => (o[k] = v)); return o; }
     function fmt(n) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(+n || 0); }
     function activeSheet() {
@@ -49,19 +52,7 @@ const lang = 'en' as const;
       if (q) { try { localStorage.setItem('kp-sheet', q); } catch (e) {} return q; }
       try { return localStorage.getItem('kp-sheet') || DEFAULT_SHEET; } catch (e) { return DEFAULT_SHEET; }
     }
-    async function priceBySKU(sku) {
-      if (!sku) return 0;
-      try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(activeSheet())}`;
-        const raw = await fetch(url).then((r) => r.text());
-        const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
-        const cols = json.table.cols.map((c) => c.label);
-        const rows = json.table.rows.map((r) => r.c.map((c) => (c ? c.v : '')));
-        const list = rows.map((r) => Object.fromEntries(r.map((v, i) => [cols[i], v])));
-        const row = list.find((r) => String(r.SKU || '').trim() === String(sku).trim());
-        return row ? +String(row.PrecioUSD || '0').replace(/[^0-9.]/g, '') : 0;
-      } catch (e) { return 0; }
-    }
+    const priceBySKU = (sku) => fetchPriceBySKU(SHEET_ID, activeSheet(), sku);
     const p = getParams();
     const name = p.product || 'Kaspersky product';
     const details = [
@@ -85,16 +76,10 @@ const lang = 'en' as const;
     document.getElementById('q-h-precio').value = priceTxt;
     const waTxt = `Hi, I'd like this Kaspersky quote:%0A%0A${encodeURIComponent(name)}%0A${encodeURIComponent(details)}%0APrice: ${encodeURIComponent(priceTxt)} (tax as applicable)`;
     document.getElementById('q-wa').href = `https://wa.me/${WA}?text=${waTxt}`;
-    const form = document.getElementById('q-form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type=submit]');
-      if (btn) btn.disabled = true;
-      try {
-        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-        if (res.ok) { location.href = '/en/thank-you/'; }
-        else { alert('We could not send the quote. Please contact us on WhatsApp.'); if (btn) btn.disabled = false; }
-      } catch (err) { alert('Network error. Please try again or contact us on WhatsApp.'); if (btn) btn.disabled = false; }
+    wireAjaxForm('q-form', {
+      redirectTo: '/en/thank-you/',
+      errorMsg: 'We could not send the quote. Please contact us on WhatsApp.',
+      networkErrorMsg: 'Network error. Please try again or contact us on WhatsApp.',
     });
   </script>
 </BaseLayout>
